@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/containedButton"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="293dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="19dp"
+        android:gravity="center"
+        android:text="Login"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password_inp" />
+
+    <Button
+        android:id="@+id/create_account_btn"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="159dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:text="Create Account /"
+        android:textColor="#3B53D5"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/containedButton" />
+
+    <Button
+        android:id="@+id/forget_password_btn"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="155dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="80dp"
+        android:gravity="center"
+        android:text="Forget password"
+        android:textColor="#3B53D5"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/containedButton" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="114dp"
+        android:layout_height="112dp"
+        android:layout_marginTop="104dp"
+        android:layout_marginBottom="109dp"
+        android:background="@drawable/ic_launcher_foreground"
+        app:layout_constraintBottom_toTopOf="@+id/username_inp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/password_inp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="296dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:hint="Password"
+        app:boxStrokeColor="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/username_inp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/username_inp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="296dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="109dp"
+        android:layout_marginBottom="394dp"
+        android:gravity="center"
+        android:hint="Email or Username"
+        app:boxStrokeColor="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
