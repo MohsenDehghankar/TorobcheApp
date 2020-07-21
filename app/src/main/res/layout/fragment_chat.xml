@@ -17,7 +17,5 @@
         app:mt_speechMode="true"
         tools:layout_editor_absoluteX="0dp" />
 
-    <include layout="@layout/bottom" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

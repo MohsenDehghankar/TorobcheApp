@@ -1,21 +1,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/menu_1"
+        android:id="@+id/menu_activity"
         android:enabled="true"
         android:icon="@drawable/clock"
         android:title="@string/activity"/>
     <item
-        android:id="@+id/menu_2"
+        android:id="@+id/menu_home"
         android:enabled="true"
         android:icon="@drawable/home"
         android:title="@string/home"/>
     <item
-        android:id="@+id/menu_3"
+        android:id="@+id/menu_chat"
         android:enabled="true"
         android:icon="@drawable/chat"
         android:title="@string/chat"/>
     <item
-        android:id="@+id/menu_4"
+        android:id="@+id/menu_game"
         android:enabled="true"
         android:icon="@drawable/game"
         android:title="@string/game"/>

@@ -15,7 +15,7 @@
         android:text="one player"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/include"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/multi_btn"
         app:layout_constraintStart_toEndOf="@+id/multi_btn" />
 
@@ -31,7 +31,7 @@
         android:text="Group"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/include"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/multi_btn" />
 
@@ -47,15 +47,8 @@
         android:text="multiplayer"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/include"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/gp_btn"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <include
-        android:id="@+id/include"
-        layout="@layout/bottom"
-        tools:layout_editor_absoluteX="-138dp"
-        tools:layout_editor_absoluteY="-81dp" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
