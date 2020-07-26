@@ -1,46 +1,29 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/su_username_inp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="296dp"
         android:layout_height="55dp"
-        android:layout_marginBottom="592dp"
         android:gravity="center"
-        android:hint="Verification Code"
+        android:hint="@string/verification_code"
         app:boxStrokeColor="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.469"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/su_email_inp">
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number" />
 
+
     </com.google.android.material.textfield.TextInputLayout>
-
-    <Button
-        android:id="@+id/containedButton"
-        style="@style/Widget.MaterialComponents.Button"
-        android:layout_width="293dp"
-        android:layout_height="55dp"
-        android:gravity="center"
-        android:text="Signup"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.483"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="409dp" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
