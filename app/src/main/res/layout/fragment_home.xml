@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="338dp"
         android:layout_marginBottom="140dp"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        app:layout_constraintBottom_toTopOf="@+id/category_recyclerView"
         tools:layout_editor_absoluteX="82dp">
 
         <ImageView
@@ -70,12 +70,11 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/category_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="33dp" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
