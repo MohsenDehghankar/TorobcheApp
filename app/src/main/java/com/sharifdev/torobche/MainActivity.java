@@ -97,7 +97,8 @@ public class MainActivity extends AppCompatActivity {
 
                 AuthUtils.signUpUser(username.getText().toString(), password.getText().toString(),
                         email.getText().toString(),
-                        new AuthUtils.UserSignUpCallback(result, progressBar, getSupportFragmentManager()));
+                        new AuthUtils.UserSignUpCallback(result, progressBar, getSupportFragmentManager()
+                                , ((TextInputEditText) findViewById(R.id.entered_code))));
             }
         });
     }
