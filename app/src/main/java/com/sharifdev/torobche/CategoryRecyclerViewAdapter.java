@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,7 +20,7 @@ public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRe
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ImageView view =(ImageView) LayoutInflater.from(parent.getContext())
+        LinearLayout view =(LinearLayout) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.category_item, parent, false);
         return new ViewHolder(view);
     }
@@ -37,9 +38,9 @@ public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRe
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView mImageView;
 
-        public ViewHolder(ImageView view) {
+        public ViewHolder(LinearLayout view) {
             super(view);
-            mImageView = view;
+            mImageView = view.findViewById(R.id.category_image);
         }
     }
 }
