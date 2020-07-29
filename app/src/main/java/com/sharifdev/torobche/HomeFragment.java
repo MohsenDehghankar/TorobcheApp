@@ -3,6 +3,7 @@ package com.sharifdev.torobche;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,8 +34,7 @@ public class HomeFragment extends Fragment {
 
         initCategoryView(rootView, container.getContext());
 
-        // todo add button
-        //add_category =(Button) rootView.findViewById(R.id.);
+        add_category =(Button) rootView.findViewById(R.id.add_category);
         add_category.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,6 +58,7 @@ public class HomeFragment extends Fragment {
             // todo read
             categoryDataSet.add(createImageView(context));
         }
+        Log.d("hello", categoryDataSet.size()+"");
         mAdapter = new CategoryRecyclerViewAdapter(categoryDataSet);
         category_view.setAdapter(mAdapter);
     }
@@ -69,7 +70,7 @@ public class HomeFragment extends Fragment {
     }
     private ImageView createImageView(Context context){
         ImageView imageView = new ImageView(context);
-        imageView.setImageResource(R.drawable.chat);
+        imageView.setImageResource(R.drawable.ic_launcher_background);
         return imageView;
     }
 

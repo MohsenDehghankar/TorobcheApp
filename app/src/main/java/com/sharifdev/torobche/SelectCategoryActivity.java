@@ -3,6 +3,7 @@ package com.sharifdev.torobche;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 
@@ -13,16 +14,17 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class SelectCategoryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select_category_activity);
 
         GridView gridView = findViewById(R.id.category_select_view);
         gridView.setAdapter(new CategoryAdapter());
 
-        gridView.setOnClickListener(new View.OnClickListener() {
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View view) {
-                // todo add
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                // todo
             }
         });
 
