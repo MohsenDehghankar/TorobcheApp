@@ -20,6 +20,7 @@ public class Home extends AppCompatActivity {
 
         BottomNavigationView navigationBar = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         navigationBar.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
+        navigationBar.getMenu().getItem(1).setChecked(true);
 
         // load home fragment by default
         loadFragment(new HomeFragment());

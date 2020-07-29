@@ -11,9 +11,9 @@ import java.util.List;
 
 public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRecyclerViewAdapter.ViewHolder> {
 
-    private final List<ImageView> mValues;
+    private final List<Integer> mValues;
 
-    public CategoryRecyclerViewAdapter(List<ImageView> items) {
+    public CategoryRecyclerViewAdapter(List<Integer> items) {
         mValues = items;
     }
 
@@ -26,7 +26,7 @@ public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRe
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mImageView = mValues.get(position);
+        holder.mImageView.setImageResource(mValues.get(position));
     }
 
     @Override

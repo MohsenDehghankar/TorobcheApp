@@ -27,12 +27,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_main);
-//        Intent intent = new Intent(this, Home.class);
-//        startActivity(intent);
+        Intent intent = new Intent(this, Home.class);
+        startActivity(intent);
 
         // show sign up
-        setContentView(R.layout.signup);
-        singUpUser();
+//        setContentView(R.layout.signup);
+//        singUpUser();
 
     }
 
@@ -108,6 +108,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ParseUser.logOut();
+//        ParseUser.logOut();
     }
 }
