@@ -1,111 +1,89 @@
 package com.sharifdev.torobche;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.parse.LogOutCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
-import com.parse.SignUpCallback;
 import com.sharifdev.torobche.backUtils.AuthUtils;
-import com.sharifdev.torobche.model.User;
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_main);
 
-        // show sign up
-        setContentView(R.layout.signup);
-        singUpUser();
+        // show login page
+        setContentView(R.layout.login);
+        checkLocalUser();
 
     }
 
-    private void singUpUser() {
-        final TextInputEditText email = findViewById(R.id.su_email_inp);
-        final TextInputEditText username = findViewById(R.id.su_username_inp);
-        final TextInputEditText password = findViewById(R.id.su_password_inp);
-        final TextView result = findViewById(R.id.result);
-        final TextView passStrength = findViewById(R.id.password_strength);
-        Button btn = findViewById(R.id.sign_up_btn);
-        final ProgressBar progressBar = findViewById(R.id.singup_progress);
-        setPasswordChange(passStrength, password);
-        setSignUpBtn(result, username, email, password, passStrength, progressBar, btn);
-    }
+    private void checkLocalUser() {
+        final TextView status = findViewById(R.id.login_status);
+        ParseUser currentUser = ParseUser.getCurrentUser();
 
-    private void setPasswordChange(final TextView passStrength, TextInputEditText password) {
-        password.addTextChangedListener(new TextWatcher() {
+        // todo: temporary key for logout (to be removed)
+        Button logout = findViewById(R.id.logout_tmp);
+        logout.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                passStrength.setText(R.string.not_set);
-                passStrength.setTextColor(Color.RED);
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (s.length() == 0) {
-                    passStrength.setText(R.string.not_set);
-                    passStrength.setTextColor(Color.RED);
-                } else if (s.length() < 6) {
-                    passStrength.setText(R.string.weak);
-                    passStrength.setTextColor(Color.RED);
-                } else if (s.length() < 10) {
-                    passStrength.setText(R.string.medium);
-                    passStrength.setTextColor(getResources().getColor(R.color.green_light));
-                } else if (s.length() < 20) {
-                    passStrength.setText(R.string.strong);
-                    passStrength.setTextColor(getResources().getColor(R.color.green));
-                } else {
-                    passStrength.setTextColor(Color.RED);
-                    passStrength.setText(R.string.max_reach);
-                }
+            public void onClick(View v) {
+                ParseUser.logOutInBackground(new LogOutCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        status.setVisibility(View.VISIBLE);
+                        if (e == null) {
+                            status.setTextColor(Color.BLACK);
+                            status.setText(R.string.logout);
+                        } else {
+                            status.setTextColor(Color.RED);
+                            status.setText(e.getMessage());
+                        }
+                    }
+                });
             }
         });
+        //
+
+        if (currentUser != null) {
+            status.setTextColor(Color.GREEN);
+            status.setText("Already Logged In: " + currentUser.getUsername());
+            status.setVisibility(View.VISIBLE);
+        }
+        setLoginViews();
     }
 
-    private void setSignUpBtn(final TextView result, final TextInputEditText username, final TextInputEditText email
-            , final TextInputEditText password, final TextView passStrength, final ProgressBar progressBar
-            , Button btn) {
-        btn.setOnClickListener(new View.OnClickListener() {
+    private void setLoginViews() {
+        Button createAccount = ((Button) findViewById(R.id.create_account_btn));
+        createAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent signUpPage = new Intent(getApplicationContext(), SignUpActivity.class);
+                startActivity(signUpPage);
+            }
+        });
+        Button login = findViewById(R.id.login_btn);
+        final ProgressBar progressBar = findViewById(R.id.login_prgrsbar);
+        final TextView loginStatus = findViewById(R.id.login_status);
+        login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
-                if (passStrength.getText().equals(getString(R.string.weak)) ||
-                        passStrength.getText().equals(getString(R.string.not_entered)) ||
-                        passStrength.getText().equals(getString(R.string.max_reach))
-                ) {
-                    progressBar.setVisibility(View.GONE);
-                    result.setText(R.string.incorrect_input);
-                    return;
-                }
-
-                AuthUtils.signUpUser(username.getText().toString(), password.getText().toString(),
-                        email.getText().toString(),
-                        new AuthUtils.UserSignUpCallback(result, progressBar, getSupportFragmentManager()
-                                , ((TextInputEditText) findViewById(R.id.entered_code))));
+                ParseUser.logInInBackground(((TextInputEditText) findViewById(R.id.username_inp_login2)).getText().toString()
+                        , ((TextInputEditText) findViewById(R.id.password_inp_login2)).getText().toString()
+                        , new AuthUtils.UserLoginCallback(loginStatus, progressBar));
             }
         });
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        ParseUser.logOut();
     }
 }

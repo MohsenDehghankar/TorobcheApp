@@ -15,7 +15,6 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="username">Username</string>
     <string name="email">Email</string>
-    <string name="password">Password</string>
     <string name="not_entered">Not Entered</string>
     <string name="weak">WEAK</string>
     <string name="medium">MEDIUM</string>
@@ -26,4 +25,14 @@
     <string name="signup">Signup</string>
     <string name="weak_pass">Password is weak</string>
     <string name="incorrect_input">Incorrect Inputs</string>
+    <string name="incorrect_code">incorrect code</string>
+    <string name="verified">verified successfully</string>
+    <string name="login">Login</string>
+    <string name="create_account">Create Account </string>
+    <string name="forget_password">Forget password</string>
+    <string name="password">Password</string>
+    <string name="username_input">Username</string>
+    <string name="login_suc">Login Successful</string>
+    <string name="logout_tmp_btn">Logout (tmp btn)</string>
+    <string name="logout">Logged Out</string>
 </resources>
