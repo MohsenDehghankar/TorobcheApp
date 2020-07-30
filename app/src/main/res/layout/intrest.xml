@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/topic_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -16,7 +16,7 @@
         app:layout_constraintHorizontal_bias="0.052"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/ic_launcher_background" />
+        android:background="@drawable/chat" />
 
     <TextView
         android:id="@+id/textView"
@@ -28,7 +28,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/topic_image" />
 
     <TextView
         android:id="@+id/textView2"
@@ -43,13 +43,13 @@
         app:layout_constraintTop_toBottomOf="@+id/recyclerView2" />
 
     <TextView
-        android:id="@+id/intrest_name"
+        android:id="@+id/topic_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
         android:layout_marginTop="39dp"
         android:text="naaaaaame"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintStart_toEndOf="@+id/topic_image"
         app:layout_constraintTop_toTopOf="parent" />
 
     <View

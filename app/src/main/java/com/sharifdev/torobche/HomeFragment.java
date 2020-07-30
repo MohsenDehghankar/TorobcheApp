@@ -26,7 +26,7 @@ public class HomeFragment extends Fragment {
     private static RecyclerView category_view;
     private  RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
-    private ArrayList<Integer> categoryDataSet = new ArrayList<>();
+    private ArrayList<SelectCategoryActivity.CategoryClass> categoryDataSet = new ArrayList<>();
     private Button add_category;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
@@ -56,9 +56,9 @@ public class HomeFragment extends Fragment {
 
         // todo
         for(int i = 0 ; i< 10 ; i ++)
-            categoryDataSet.add(R.drawable.ic_launcher_background);
+            categoryDataSet.add(new SelectCategoryActivity.CategoryClass("android", R.drawable.ic_launcher_background));
 
-        mAdapter = new CategoryRecyclerViewAdapter(categoryDataSet);
+        mAdapter = new CategoryRecyclerViewAdapter(getContext(),categoryDataSet);
         category_view.setAdapter(mAdapter);
     }
 
@@ -66,11 +66,6 @@ public class HomeFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
 
-    }
-    private ImageView createImageView(Context context){
-        ImageView imageView = new ImageView(context);
-        imageView.setImageResource(R.drawable.ic_launcher_background);
-        return imageView;
     }
 
 }

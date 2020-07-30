@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sharifdev.torobche">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -13,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:usesCleartextTraffic="true">
+        <activity android:name=".CategoryPage"></activity>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">
@@ -22,9 +21,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Home"/>
-        <activity android:name=".SelectCategoryActivity"/>
-        <activity android:name=".SignUpActivity"/>
+        <activity android:name=".Home" />
+        <activity android:name=".SelectCategoryActivity" />
+        <activity android:name=".SignUpActivity" />
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

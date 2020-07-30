@@ -1,5 +1,7 @@
 package com.sharifdev.torobche;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +14,12 @@ import java.util.List;
 
 public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRecyclerViewAdapter.ViewHolder> {
 
-    private final List<Integer> mValues;
+    private final List<SelectCategoryActivity.CategoryClass> mValues;
+    private Context context;
 
-    public CategoryRecyclerViewAdapter(List<Integer> items) {
+    public CategoryRecyclerViewAdapter(Context context, List<SelectCategoryActivity.CategoryClass> items) {
         mValues = items;
+        this.context = context;
     }
 
     @Override
@@ -26,8 +30,18 @@ public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRe
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mImageView.setImageResource(mValues.get(position));
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
+        holder.mImageView.setImageResource(mValues.get(position).image);
+        holder.mImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, CategoryPage.class);
+                intent.putExtra("image",  mValues.get(position).image);
+                intent.putExtra("name", mValues.get(position).name);
+                context.startActivity(intent);
+            }
+        });
+
     }
 
     @Override
