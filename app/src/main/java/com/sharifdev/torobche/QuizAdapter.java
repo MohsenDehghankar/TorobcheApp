@@ -12,18 +12,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRecyclerViewAdapter.ViewHolder> {
+public class QuizAdapter extends RecyclerView.Adapter<CategoryRecyclerViewAdapter.ViewHolder> {
 
     private final List<SelectCategoryActivity.HolderClass> mValues;
     private Context context;
 
-    public CategoryRecyclerViewAdapter(Context context, List<SelectCategoryActivity.HolderClass> items) {
+    public QuizAdapter(Context context, List<SelectCategoryActivity.HolderClass> items) {
         mValues = items;
         this.context = context;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public CategoryRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LinearLayout view;
         if (viewType == R.layout.single_image_layout) {
             view = (LinearLayout) LayoutInflater.from(parent.getContext())
@@ -32,7 +32,7 @@ public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRe
             view = (LinearLayout) LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.add_button_layout, parent, false);
         }
-        return new ViewHolder(view);
+        return new CategoryRecyclerViewAdapter.ViewHolder(view);
     }
 
 
@@ -40,15 +40,18 @@ public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRe
     public int getItemViewType(int position) {
         return (position == mValues.size()) ? R.layout.add_button_layout : R.layout.single_image_layout;
     }
+    @Override
+    public int getItemCount() {
+        return mValues.size() + 1;
+    }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
+    public void onBindViewHolder(final CategoryRecyclerViewAdapter.ViewHolder holder, final int position) {
         if (position == mValues.size()) {
             holder.mImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, SelectCategoryActivity.class);
-                    context.startActivity(intent);
+
                 }
             });
         } else {
@@ -56,26 +59,10 @@ public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRe
             holder.mImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, CategoryPage.class);
-                    intent.putExtra("image", mValues.get(position).image);
-                    intent.putExtra("name", mValues.get(position).name);
-                    context.startActivity(intent);
+
                 }
             });
         }
     }
 
-    @Override
-    public int getItemCount() {
-        return mValues.size() + 1;
-    }
-
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public ImageView mImageView;
-
-        public ViewHolder(LinearLayout view) {
-            super(view);
-            mImageView = view.findViewById(R.id.category_image);
-        }
-    }
 }

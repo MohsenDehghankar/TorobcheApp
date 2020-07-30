@@ -14,7 +14,7 @@ public class CategoryPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.intrest);
+        setContentView(R.layout.topic_page);
 
         int imageResource =  Objects.requireNonNull(getIntent().getExtras()).getInt("image");
         String name = getIntent().getExtras().getString("name");

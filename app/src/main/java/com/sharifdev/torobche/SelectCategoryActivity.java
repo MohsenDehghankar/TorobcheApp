@@ -1,6 +1,5 @@
 package com.sharifdev.torobche;
 
-import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,15 +14,12 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.zip.Inflater;
 
 public class SelectCategoryActivity extends AppCompatActivity {
-    public static ArrayList<CategoryClass> categoryClasses;
-    private ArrayList<CategoryClass> selectedCategory;
+    public static ArrayList<HolderClass> holderClasses;
+    private ArrayList<HolderClass> selectedCategory;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
@@ -31,19 +27,19 @@ public class SelectCategoryActivity extends AppCompatActivity {
         setContentView(R.layout.select_category_activity);
 
         selectedCategory = new ArrayList<>();
-        categoryClasses = new ArrayList<>();
-        categoryClasses.add(new CategoryClass("android" , R.drawable.ic_launcher_background));
-        categoryClasses.add(new CategoryClass("android" , R.drawable.ic_launcher_foreground));
+        holderClasses = new ArrayList<>();
+        holderClasses.add(new HolderClass("android" , R.drawable.ic_launcher_background));
+        holderClasses.add(new HolderClass("android" , R.drawable.ic_launcher_foreground));
 
         GridView gridView = findViewById(R.id.category_select_view);
-        gridView.setAdapter(new CategoryAdapter(categoryClasses));
+        gridView.setAdapter(new CategoryAdapter(holderClasses));
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Drawable highlight = getResources().getDrawable(R.drawable.highlight);
                 view.findViewById(R.id.select_category_item_image).setBackground(highlight);
-                selectedCategory.add(categoryClasses.get(i));
+                selectedCategory.add(holderClasses.get(i));
             }
         });
 
@@ -68,20 +64,20 @@ public class SelectCategoryActivity extends AppCompatActivity {
 
     }
 
-    public static class CategoryClass {
+    public static class HolderClass {
         String name;
         int image;
 
-        CategoryClass(String name, int image){
+        HolderClass(String name, int image){
             this.image = image;
             this.name = name;
         }
     }
 
     public class CategoryAdapter extends BaseAdapter {
-        private final List<CategoryClass> items;
+        private final List<HolderClass> items;
 
-        public CategoryAdapter(List<CategoryClass> items) {
+        public CategoryAdapter(List<HolderClass> items) {
             this.items = items;
         }
 
@@ -107,7 +103,7 @@ public class SelectCategoryActivity extends AppCompatActivity {
 
             if (view == null) {
                 LayoutInflater inflter = (LayoutInflater.from(getApplicationContext()));
-                view = inflter.inflate(R.layout.select_vategory_item, null);
+                view = inflter.inflate(R.layout.select_category_item, null);
             }
 
             imageView = (ImageView) view.findViewById(R.id.select_category_item_image);
