@@ -1,6 +1,7 @@
 package com.sharifdev.torobche;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +22,7 @@ import java.util.List;
 import java.util.zip.Inflater;
 
 public class SelectCategoryActivity extends AppCompatActivity {
-    public static ArrayList<CategoryClass> categoryClasses = new ArrayList<>();
+    public static ArrayList<CategoryClass> categoryClasses;
     private ArrayList<CategoryClass> selectedCategory;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +30,10 @@ public class SelectCategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select_category_activity);
 
+        selectedCategory = new ArrayList<>();
+        categoryClasses = new ArrayList<>();
         categoryClasses.add(new CategoryClass("android" , R.drawable.ic_launcher_background));
-        categoryClasses.add(new CategoryClass("android" , R.drawable.ic_launcher_background));
+        categoryClasses.add(new CategoryClass("android" , R.drawable.ic_launcher_foreground));
 
         GridView gridView = findViewById(R.id.category_select_view);
         gridView.setAdapter(new CategoryAdapter(categoryClasses));
@@ -38,15 +41,28 @@ public class SelectCategoryActivity extends AppCompatActivity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Drawable highlight = getResources().getDrawable(R.drawable.highlight);
+                view.findViewById(R.id.select_category_item_image).setBackground(highlight);
                 selectedCategory.add(categoryClasses.get(i));
             }
         });
+
+        Button cancel = (Button) findViewById(R.id.cancel_category);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
 
         Button save = (Button) findViewById(R.id.save_category);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 // todo save selected array in account
+                finish();
             }
         });
 

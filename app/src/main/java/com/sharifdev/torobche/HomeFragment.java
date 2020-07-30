@@ -54,11 +54,10 @@ public class HomeFragment extends Fragment {
                 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         category_view.setLayoutManager(layoutManager);
 
-        // specify an adapter (see also next example)
-        for(int i= 0; i< 10; i++) {
-            // todo read
+        // todo
+        for(int i = 0 ; i< 10 ; i ++)
             categoryDataSet.add(R.drawable.ic_launcher_background);
-        }
+
         mAdapter = new CategoryRecyclerViewAdapter(categoryDataSet);
         category_view.setAdapter(mAdapter);
     }

@@ -18,6 +18,8 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+
+
         BottomNavigationView navigationBar = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         navigationBar.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
         navigationBar.getMenu().getItem(1).setChecked(true);
@@ -26,6 +28,7 @@ public class Home extends AppCompatActivity {
         loadFragment(new HomeFragment());
 
     }
+
 
     private void loadFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

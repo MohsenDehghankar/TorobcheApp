@@ -39,7 +39,7 @@
 
     <GridView
         android:id="@+id/category_select_view"
-        android:layout_width="414dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:horizontalSpacing="10dp"
