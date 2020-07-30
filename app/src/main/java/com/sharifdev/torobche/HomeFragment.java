@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.parse.ParseUser;
+
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
