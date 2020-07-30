@@ -28,7 +28,6 @@ public class ActivityFragment extends Fragment {
         return rootView;
     }
     private void initHistoryRecyclerView(View rootView){
-
         RecyclerView historyRecyclerView = rootView.findViewById(R.id.history_recyclerView);
         historyRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager

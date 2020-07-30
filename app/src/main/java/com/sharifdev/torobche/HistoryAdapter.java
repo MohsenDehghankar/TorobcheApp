@@ -1,6 +1,7 @@
 package com.sharifdev.torobche;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +37,9 @@ public class HistoryAdapter extends RecyclerView.Adapter<CategoryRecyclerViewAda
         holder.mImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(context, HistoryActivity.class);
+                intent.putExtra("history_number", mValues.get(position));
+                context.startActivity(intent);
             }
         });
     }
