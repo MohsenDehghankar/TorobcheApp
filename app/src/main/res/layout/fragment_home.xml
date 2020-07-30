@@ -94,7 +94,8 @@
             android:layout_height="200dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
-            tools:layout_editor_absoluteX="33dp" />
+            tools:layout_editor_absoluteX="33dp"
+            />
     </LinearLayout>
 
 

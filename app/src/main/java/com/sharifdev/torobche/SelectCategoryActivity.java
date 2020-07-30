@@ -2,10 +2,12 @@ package com.sharifdev.torobche;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,14 +18,19 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.Inflater;
 
 public class SelectCategoryActivity extends AppCompatActivity {
     public static ArrayList<CategoryClass> categoryClasses = new ArrayList<>();
+    private ArrayList<CategoryClass> selectedCategory;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select_category_activity);
+
+        categoryClasses.add(new CategoryClass("android" , R.drawable.ic_launcher_background));
+        categoryClasses.add(new CategoryClass("android" , R.drawable.ic_launcher_background));
 
         GridView gridView = findViewById(R.id.category_select_view);
         gridView.setAdapter(new CategoryAdapter(categoryClasses));
@@ -31,7 +38,15 @@ public class SelectCategoryActivity extends AppCompatActivity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                // todo
+                selectedCategory.add(categoryClasses.get(i));
+            }
+        });
+
+        Button save = (Button) findViewById(R.id.save_category);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // todo save selected array in account
             }
         });
 
@@ -40,6 +55,11 @@ public class SelectCategoryActivity extends AppCompatActivity {
     public static class CategoryClass {
         String name;
         int image;
+
+        CategoryClass(String name, int image){
+            this.image = image;
+            this.name = name;
+        }
     }
 
     public class CategoryAdapter extends BaseAdapter {
@@ -70,7 +90,8 @@ public class SelectCategoryActivity extends AppCompatActivity {
             TextView textView;
 
             if (view == null) {
-                view = View.inflate(viewGroup.getContext(), R.layout.select_vategory_item, viewGroup);
+                LayoutInflater inflter = (LayoutInflater.from(getApplicationContext()));
+                view = inflter.inflate(R.layout.select_vategory_item, null);
             }
 
             imageView = (ImageView) view.findViewById(R.id.select_category_item_image);
