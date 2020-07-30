@@ -10,15 +10,52 @@
         style="@style/Widget.MaterialComponents.Button"
         android:layout_width="293dp"
         android:layout_height="55dp"
-        android:layout_marginTop="54dp"
+        android:layout_marginTop="14dp"
         android:gravity="center"
         android:text="@string/signup"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/su_password_layout" />
+        app:layout_constraintTop_toBottomOf="@+id/password_strength" />
+
+    <ProgressBar
+        android:id="@+id/singup_progress"
+        style="@android:style/Widget.DeviceDefault.Light.ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/result" />
+
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="296dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="15dp"
+        android:width="100dp"
+        android:height="10dp"
+        android:gravity="center"
+        android:textColor="#FF0000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sign_up_btn" />
+
+    <TextView
+        android:id="@+id/code_error"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/incorrect_code"
+        android:textColor="#FF0000"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/result" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/su_username_layout"
@@ -26,13 +63,10 @@
         android:layout_width="296dp"
         android:layout_height="55dp"
         android:layout_marginTop="12dp"
-        android:layout_marginBottom="446dp"
         android:gravity="center"
         android:hint="@string/username"
         app:boxStrokeColor="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/su_email_layout">
 
@@ -65,6 +99,7 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/su_password_layout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -87,20 +122,6 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/result"
-        android:layout_width="296dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="10dp"
-        android:width="100dp"
-        android:height="10dp"
-        android:gravity="center"
-        android:textColor="#FF0000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sign_up_btn" />
-
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/password_strength"
         android:layout_width="296dp"
@@ -113,31 +134,6 @@
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/su_password_layout" />
-
-
-    <ProgressBar
-        android:id="@+id/singup_progress"
-        style="@android:style/Widget.DeviceDefault.Light.ProgressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/result" />
-
-    <TextView
-        android:id="@+id/code_error"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/incorrect_code"
-        android:textColor="#FF0000"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/singup_progress" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

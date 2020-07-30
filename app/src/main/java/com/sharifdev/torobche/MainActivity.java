@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 //        // show login page
 //        setContentView(R.layout.login);
 //        checkLocalUser();
-//
+
         Intent intent = new Intent(this, Home.class);
         startActivity(intent);
 
