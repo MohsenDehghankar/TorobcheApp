@@ -9,6 +9,8 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        // enable parse local data store
+//        Parse.enableLocalDatastore(this);
         // initialize backEnd Connection
         Parse.initialize(new Parse.Configuration.Builder(this)
                 .applicationId("KzyaJzgW3mW7sxJX") // should correspond to APP_ID env variable
