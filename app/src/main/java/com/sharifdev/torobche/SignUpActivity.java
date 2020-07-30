@@ -20,6 +20,7 @@ import com.sharifdev.torobche.backUtils.AuthUtils;
 public class SignUpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup);
         setSignUpViews();

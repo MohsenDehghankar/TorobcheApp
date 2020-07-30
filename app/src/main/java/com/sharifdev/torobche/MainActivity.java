@@ -22,17 +22,15 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
-        // show login page
-        setContentView(R.layout.login);
-        checkLocalUser();
-        //setContentView(R.layout.activity_main);
-        //Intent intent = new Intent(this, Home.class);
-        //startActivity(intent);
 
-        // show sign up
-        setContentView(R.layout.signup);
-        singUpUser();
+//        // show login page
+//        setContentView(R.layout.login);
+//        checkLocalUser();
+//
+        Intent intent = new Intent(this, Home.class);
+        startActivity(intent);
 
     }
 
