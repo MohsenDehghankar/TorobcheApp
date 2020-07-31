@@ -21,6 +21,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 public class QuestionMakeActivity extends AppCompatActivity {
+    private boolean[] answer = new boolean[4];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,9 @@ public class QuestionMakeActivity extends AppCompatActivity {
                 if(topic.getText() == null || topic.getText().toString().equals("")){
                     Toast.makeText(getApplicationContext(),"Topic is Empty!!!", Toast.LENGTH_SHORT).show();
                 }
+                else if(!answer[0] && !answer[1] && !answer[2] && !answer[3]){
+                    Toast.makeText(getApplicationContext(),"Select an answer", Toast.LENGTH_SHORT).show();
+                }
                 else {
                     // todo
                     onBackPressed();
@@ -58,6 +62,11 @@ public class QuestionMakeActivity extends AppCompatActivity {
             }
         });
 
+        setAnswer((ImageView) findViewById(R.id.imageView1) , 1);
+        setAnswer((ImageView) findViewById(R.id.imageView2) , 2);
+        setAnswer((ImageView) findViewById(R.id.imageView3) , 3);
+        setAnswer((ImageView) findViewById(R.id.imageView4) , 4);
+
     }
 
     private void setListeners(ImageView imageView, final int requestCode) {
@@ -71,6 +80,22 @@ public class QuestionMakeActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void setAnswer(final ImageView imageView, final int a){
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(imageView.getDrawable().getConstantState() ==getResources().getDrawable(R.drawable.wrong).getConstantState()){
+                    imageView.setImageResource(R.drawable.correct);
+                    answer[a-1] = true;
+                }
+                else{
+                    imageView.setImageResource(R.drawable.wrong);
+                    answer[a-1] = false;
+                }
+            }
+        });
     }
 
     @Override

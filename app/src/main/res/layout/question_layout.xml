@@ -25,6 +25,11 @@
             android:focusable="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                app:srcCompat="@drawable/wrong" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -48,7 +53,7 @@
                     android:layout_width="70dp"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_launcher_background" />
+                    android:src="@drawable/no_photo" />
 
             </LinearLayout>
 
@@ -66,6 +71,8 @@
             android:focusable="true"
             app:layout_constraintBottom_toTopOf="@+id/card_3"
             app:layout_constraintEnd_toEndOf="parent">
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -89,9 +96,14 @@
                     android:layout_width="70dp"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_launcher_background" />
+                    android:src="@drawable/no_photo" />
 
             </LinearLayout>
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                app:srcCompat="@drawable/wrong" />
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -107,7 +119,11 @@
             android:focusable="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent">
-
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                app:srcCompat="@drawable/wrong" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -130,7 +146,7 @@
                     android:layout_width="70dp"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_launcher_background" />
+                    android:src= "@drawable/no_photo" />
 
             </LinearLayout>
 
@@ -148,7 +164,11 @@
             android:focusable="true"
             app:layout_constraintBottom_toTopOf="@+id/card_4"
             app:layout_constraintStart_toStartOf="parent">
-
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                app:srcCompat="@drawable/wrong" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -171,7 +191,7 @@
                     android:layout_width="70dp"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_launcher_background" />
+                    android:src="@drawable/no_photo" />
 
             </LinearLayout>
 
@@ -213,7 +233,7 @@
                 android:layout_width="200dp"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_launcher_background" />
+                android:src="@drawable/no_photo"/>
 
         </LinearLayout>
 
@@ -234,8 +254,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/topic_inp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword" />
+            android:layout_height="wrap_content" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -276,5 +295,6 @@
             app:layout_constraintStart_toEndOf="@+id/cancel_question" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
