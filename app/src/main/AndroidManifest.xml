@@ -12,7 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".HistoryActivity"></activity>
+        <activity android:name=".QuizActivity"></activity>
+        <activity android:name=".QuestionMakeActivity" />
+        <activity android:name=".HistoryActivity" />
         <activity android:name=".CategoryPage" />
         <activity
             android:name=".MainActivity"

@@ -43,7 +43,7 @@ public class SelectCategoryActivity extends AppCompatActivity {
             }
         });
 
-        Button cancel = (Button) findViewById(R.id.cancel_category);
+        Button cancel = (Button) findViewById(R.id.cancel_question);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,7 +52,7 @@ public class SelectCategoryActivity extends AppCompatActivity {
         });
 
 
-        Button save = (Button) findViewById(R.id.save_category);
+        Button save = (Button) findViewById(R.id.save_question);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

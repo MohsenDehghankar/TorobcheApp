@@ -13,7 +13,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent">
     <Button
-        android:id="@+id/cancel_category"
+        android:id="@+id/cancel_question"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="159dp"
         android:layout_height="45dp"
@@ -27,7 +27,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/save_category"
+        android:id="@+id/save_question"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="159dp"
         android:layout_height="45dp"
@@ -39,7 +39,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.552"
-        app:layout_constraintStart_toEndOf="@+id/cancel_category" />
+        app:layout_constraintStart_toEndOf="@+id/cancel_question" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     <GridView

@@ -51,7 +51,8 @@ public class QuizAdapter extends RecyclerView.Adapter<CategoryRecyclerViewAdapte
             holder.mImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    Intent intent = new Intent(context, QuizActivity.class);
+                    context.startActivity(intent);
                 }
             });
         } else {
