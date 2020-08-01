@@ -1,4 +1,4 @@
-package com.sharifdev.torobche;
+package com.sharifdev.torobche.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.sharifdev.torobche.R;
 
 public class QuizActivity extends AppCompatActivity {
 

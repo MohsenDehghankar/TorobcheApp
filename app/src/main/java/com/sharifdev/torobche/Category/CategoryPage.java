@@ -1,10 +1,12 @@
-package com.sharifdev.torobche;
+package com.sharifdev.torobche.Category;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.sharifdev.torobche.R;
 
 import java.util.Objects;
 

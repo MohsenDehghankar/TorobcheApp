@@ -1,4 +1,4 @@
-package com.sharifdev.torobche;
+package com.sharifdev.torobche.Activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +8,10 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.sharifdev.torobche.Activity.HistoryActivity;
+import com.sharifdev.torobche.Category.CategoryRecyclerViewAdapter;
+import com.sharifdev.torobche.R;
 
 import java.util.List;
 

@@ -1,25 +1,27 @@
-package com.sharifdev.torobche;
+package com.sharifdev.torobche.Activity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.sharifdev.torobche.Activity.QuizActivity;
+import com.sharifdev.torobche.Category.CategoryRecyclerViewAdapter;
+import com.sharifdev.torobche.Category.SelectCategoryActivity;
+import com.sharifdev.torobche.R;
 
 import java.util.List;
 
-public class QuestionAdapter extends RecyclerView.Adapter<CategoryRecyclerViewAdapter.ViewHolder> {
+public class QuizAdapter extends RecyclerView.Adapter<CategoryRecyclerViewAdapter.ViewHolder> {
 
     private final List<SelectCategoryActivity.HolderClass> mValues;
     private Context context;
 
-    public QuestionAdapter(Context context, List<SelectCategoryActivity.HolderClass> items) {
+    public QuizAdapter(Context context, List<SelectCategoryActivity.HolderClass> items) {
         mValues = items;
         this.context = context;
     }
@@ -53,7 +55,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<CategoryRecyclerViewAd
             holder.mImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, QuestionMakeActivity.class);
+                    Intent intent = new Intent(context, QuizActivity.class);
                     context.startActivity(intent);
                 }
             });

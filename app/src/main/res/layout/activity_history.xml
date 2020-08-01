@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
     app:layout_anchorGravity="center"
-    tools:context="com.sharifdev.torobche.HistoryActivity">
+    tools:context="com.sharifdev.torobche.Activity.HistoryActivity">
 
     <ImageView
         android:id="@+id/opponent_image"

@@ -1,4 +1,4 @@
-package com.sharifdev.torobche;
+package com.sharifdev.torobche.Chat;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,8 +7,12 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.mancj.materialsearchbar.MaterialSearchBar;
+import com.sharifdev.torobche.Chat.ChatAdapter;
+import com.sharifdev.torobche.R;
 
 import java.util.ArrayList;
 
@@ -26,7 +30,9 @@ public class ChatFragment extends Fragment {
         names.add("zizi");
         imageIds.add(R.drawable.plus);
 
-        ListView userList = rootView.findViewById(R.id.user_list);
+        RecyclerView userList = rootView.findViewById(R.id.user_list);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        userList.setLayoutManager(layoutManager);
         ChatAdapter chatAdapter = new ChatAdapter(getContext(), imageIds, names);
         userList.setAdapter(chatAdapter);
 

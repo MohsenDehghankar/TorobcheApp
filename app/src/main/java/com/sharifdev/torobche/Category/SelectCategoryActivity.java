@@ -1,4 +1,4 @@
-package com.sharifdev.torobche;
+package com.sharifdev.torobche.Category;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.sharifdev.torobche.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,10 +67,10 @@ public class SelectCategoryActivity extends AppCompatActivity {
     }
 
     public static class HolderClass {
-        String name;
-        int image;
+        public String name;
+        public int image;
 
-        HolderClass(String name, int image){
+        public HolderClass(String name, int image){
             this.image = image;
             this.name = name;
         }

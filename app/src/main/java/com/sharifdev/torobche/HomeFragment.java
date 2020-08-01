@@ -11,7 +11,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.parse.ParseUser;
+import com.sharifdev.torobche.Category.CategoryRecyclerViewAdapter;
+import com.sharifdev.torobche.Category.SelectCategoryActivity;
 
 import java.util.ArrayList;
 

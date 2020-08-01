@@ -1,28 +1,34 @@
-package com.sharifdev.torobche;
+package com.sharifdev.torobche.Category;
 
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.sharifdev.torobche.R;
+
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
-public class QuizAdapter extends RecyclerView.Adapter<CategoryRecyclerViewAdapter.ViewHolder> {
+public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRecyclerViewAdapter.ViewHolder> {
 
     private final List<SelectCategoryActivity.HolderClass> mValues;
     private Context context;
 
-    public QuizAdapter(Context context, List<SelectCategoryActivity.HolderClass> items) {
+    public CategoryRecyclerViewAdapter(Context context, List<SelectCategoryActivity.HolderClass> items) {
         mValues = items;
         this.context = context;
     }
 
+    @NotNull
     @Override
-    public CategoryRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LinearLayout view;
         if (viewType == R.layout.single_image_layout) {
             view = (LinearLayout) LayoutInflater.from(parent.getContext())
@@ -31,7 +37,7 @@ public class QuizAdapter extends RecyclerView.Adapter<CategoryRecyclerViewAdapte
             view = (LinearLayout) LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.add_button_layout, parent, false);
         }
-        return new CategoryRecyclerViewAdapter.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
 
@@ -39,18 +45,14 @@ public class QuizAdapter extends RecyclerView.Adapter<CategoryRecyclerViewAdapte
     public int getItemViewType(int position) {
         return (position == mValues.size()) ? R.layout.add_button_layout : R.layout.single_image_layout;
     }
-    @Override
-    public int getItemCount() {
-        return mValues.size() + 1;
-    }
 
     @Override
-    public void onBindViewHolder(final CategoryRecyclerViewAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         if (position == mValues.size()) {
             holder.mImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, QuizActivity.class);
+                    Intent intent = new Intent(context, SelectCategoryActivity.class);
                     context.startActivity(intent);
                 }
             });
@@ -59,10 +61,26 @@ public class QuizAdapter extends RecyclerView.Adapter<CategoryRecyclerViewAdapte
             holder.mImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    Intent intent = new Intent(context, CategoryPage.class);
+                    intent.putExtra("image", mValues.get(position).image);
+                    intent.putExtra("name", mValues.get(position).name);
+                    context.startActivity(intent);
                 }
             });
         }
     }
 
+    @Override
+    public int getItemCount() {
+        return mValues.size() + 1;
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        public ImageView mImageView;
+
+        public ViewHolder(LinearLayout view) {
+            super(view);
+            mImageView = view.findViewById(R.id.category_image);
+        }
+    }
 }

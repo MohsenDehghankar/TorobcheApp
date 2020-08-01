@@ -1,4 +1,4 @@
-package com.sharifdev.torobche;
+package com.sharifdev.torobche.Activity;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.sharifdev.torobche.Category.SelectCategoryActivity;
+import com.sharifdev.torobche.R;
 
 import java.util.ArrayList;
 

@@ -9,6 +9,9 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.sharifdev.torobche.Activity.ActivityFragment;
+import com.sharifdev.torobche.Chat.ChatFragment;
+import com.sharifdev.torobche.Game.GameFragment;
 
 public class Home extends AppCompatActivity {
 
