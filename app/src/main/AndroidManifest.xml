@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sharifdev.torobche">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -12,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".QuizActivity"></activity>
+        <activity android:name=".ChatActivity"></activity>
+        <activity android:name=".QuizActivity" />
         <activity android:name=".QuestionMakeActivity" />
         <activity android:name=".HistoryActivity" />
         <activity android:name=".CategoryPage" />
@@ -29,7 +32,5 @@
         <activity android:name=".SelectCategoryActivity" />
         <activity android:name=".SignUpActivity" />
     </application>
-
-    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
