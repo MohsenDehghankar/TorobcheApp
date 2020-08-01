@@ -52,6 +52,7 @@ public class ChatActivity extends AppCompatActivity {
             public void onClick(View view) {
                 messages.add(new Message(message.getText().toString(), username, imageResource));
                 messageAdapter.notifyDataSetChanged();
+                message.getText().clear();
                 //todo save it
             }
         });
