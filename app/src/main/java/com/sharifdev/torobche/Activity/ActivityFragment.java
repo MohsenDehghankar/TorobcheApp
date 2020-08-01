@@ -38,7 +38,7 @@ public class ActivityFragment extends Fragment {
         historyRecyclerView.setLayoutManager(layoutManager);
 
 
-        // todo
+        // todo get history from server
         for(int i = 0 ; i< 10 ; i ++)
             histories.add(R.drawable.ic_launcher_background);
 
@@ -55,7 +55,7 @@ public class ActivityFragment extends Fragment {
                 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         quizRecyclerView.setLayoutManager(layoutManager);
 
-        // todo
+        // todo get all quizzes from server
         for(int i = 0 ; i< 10 ; i ++)
             quizzes.add( new SelectCategoryActivity.HolderClass("quiz"+ i, R.drawable.ic_launcher_background));
 

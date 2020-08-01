@@ -22,19 +22,25 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
-            <ImageView
+            <androidx.cardview.widget.CardView
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                app:cardCornerRadius="35dp"
+                android:layout_gravity="center">
+                <ImageView
                 android:id="@+id/chat_image"
                 android:layout_width="60dp"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 android:src="@drawable/no_photo" />
+            </androidx.cardview.widget.CardView>
+
 
             <!-- Media -->
             <TextView
                 android:id="@+id/chat_text"
                 android:layout_width="wrap_content"
-                android:layout_height="80dp"
-                android:layout_marginTop="8dp"
+                android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="User Name"
                 android:paddingLeft="10dp"

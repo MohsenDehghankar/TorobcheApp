@@ -49,7 +49,7 @@ public class QuestionMakeActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Select an answer", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    // todo
+                    // todo save question
                     onBackPressed();
                 }
             }

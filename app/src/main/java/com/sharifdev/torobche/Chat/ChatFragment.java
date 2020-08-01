@@ -23,7 +23,7 @@ public class ChatFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView =  inflater.inflate(R.layout.fragment_chat, container, false);
 
-        //todo
+        //todo get contacts from server
         names.add("zahra");
         imageIds.add(R.drawable.plus);
 
