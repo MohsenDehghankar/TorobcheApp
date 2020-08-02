@@ -1,10 +1,12 @@
 package com.sharifdev.torobche;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,8 +17,10 @@ import android.widget.Toast;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.parse.GetCallback;
 import com.parse.LogOutCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.sharifdev.torobche.Activity.ActivityFragment;
 import com.sharifdev.torobche.Chat.ChatFragment;
@@ -40,8 +44,20 @@ public class Home extends AppCompatActivity {
         navigationBar.getMenu().getItem(1).setChecked(true);
 
         // load home fragment by default
-        loadFragment(new HomeFragment());
+        HomeFragment homeFragment = new HomeFragment();
+        loadFragment(homeFragment);
 
+        // load user from server
+        updateUser(homeFragment);
+    }
+
+    private void updateUser(final HomeFragment home) {
+        ParseUser.getCurrentUser().fetchInBackground(new GetCallback<ParseObject>() {
+            @Override
+            public void done(ParseObject object, ParseException e) {
+                home.loadUserData(home.getView());
+            }
+        });
     }
 
     private void loadFragment(Fragment fragment) {
