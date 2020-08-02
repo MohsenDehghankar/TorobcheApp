@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.material.appbar.MaterialToolbar;
@@ -20,6 +21,7 @@ import com.parse.ParseUser;
 import com.sharifdev.torobche.Activity.ActivityFragment;
 import com.sharifdev.torobche.Chat.ChatFragment;
 import com.sharifdev.torobche.Game.GameFragment;
+import com.sharifdev.torobche.model.User;
 
 public class Home extends AppCompatActivity {
 
@@ -29,7 +31,7 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        // todo app bar
+        // top app bar
         MaterialToolbar toolbar = (MaterialToolbar) findViewById(R.id.appbar);
         setSupportActionBar(toolbar);
 
@@ -42,11 +44,10 @@ public class Home extends AppCompatActivity {
 
     }
 
-
     private void loadFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_container, fragment);
-//        transaction.addToBackStack(null);
+        //transaction.addToBackStack(null);
         transaction.commit();
     }
 

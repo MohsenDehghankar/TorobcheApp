@@ -7,6 +7,6 @@ public class User {
     public String username;
     public String email;
     public String password;
-    public int image;
+    public int avatar_id;
 
 }
