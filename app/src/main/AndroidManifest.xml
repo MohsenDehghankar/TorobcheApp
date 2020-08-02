@@ -33,6 +33,10 @@
         <activity android:name=".Home" />
         <activity android:name=".Category.SelectCategoryActivity" />
         <activity android:name=".SignUpActivity" android:noHistory="true"/>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

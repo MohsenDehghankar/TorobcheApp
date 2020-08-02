@@ -1,21 +1,24 @@
 package com.sharifdev.torobche;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.parse.GetCallback;
-import com.parse.ParseException;
-import com.parse.ParseObject;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.parse.ParseUser;
+import com.sharifdev.torobche.Adapters.ProfileChooseArrayAdapter;
 import com.sharifdev.torobche.Category.CategoryRecyclerViewAdapter;
 import com.sharifdev.torobche.Category.SelectCategoryActivity;
 import com.sharifdev.torobche.model.ProfileAvatar;
@@ -31,27 +34,32 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-
-        loadUserData(rootView);
-
         initCategoryView(rootView, container.getContext());
+        loadUserData(rootView);
+        changeProfileAvatarView(rootView);
         return rootView;
     }
 
-    private void loadUserData(final View view) {
+    public void loadUserData(View view) {
         final ParseUser user = ParseUser.getCurrentUser();
         final ImageView profile = view.findViewById(R.id.profile_avatar);
-        user.fetchInBackground(new GetCallback<ParseObject>() {
-            @Override
-            public void done(ParseObject object, ParseException e) {
-                if (e == null) {
-                    profile.setImageDrawable(view.getResources().getDrawable(ProfileAvatar
-                            .getAvatarResourceId(((int) user.get("avatar_id")))));
-                } else {
-                    e.printStackTrace();
-                }
-            }
-        });
+        profile.setImageDrawable(view.getResources().getDrawable(ProfileAvatar
+                .getAvatarResourceId(((int) user.get("avatar_id")))));
+        TextView username = view.findViewById(R.id.user_id);
+        username.setText("Hi " + user.getUsername() + "!");
+        // todo: update group name
+        TextView level = view.findViewById(R.id.statistic);
+        try {
+            level.setText(getString(R.string.lev) + ((int) user.get("level")));
+        } catch (NullPointerException e) {
+            level.setText(R.string.lev_na);
+        }
+    }
+
+    private void changeProfileAvatarView(View view) {
+        ImageView profile = view.findViewById(R.id.profile_avatar);
+        profile.setOnClickListener(new ProfileAvatar
+                .ChangeAvatarBtnListener(getContext(), getActivity(), this, view));
     }
 
     private void initCategoryView(View rootView, Context context) {
