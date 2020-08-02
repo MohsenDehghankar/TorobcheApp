@@ -122,8 +122,10 @@ public class CategoryUtils {
     public static void getCategoriesByPointer(List<ParseObject> cats,
                                               final HomeFragment fragment,
                                               final View view) {
-        if (cats == null)
+        if (cats == null) {
+            fragment.initCategoryView(view, new ArrayList<ParseObject>());
             return;
+        }
 
         ArrayList<String> pointers = new ArrayList<>();
         for (ParseObject cat : cats) {
