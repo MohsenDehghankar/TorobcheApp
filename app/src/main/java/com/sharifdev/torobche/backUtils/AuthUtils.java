@@ -51,15 +51,17 @@ public class AuthUtils {
         FragmentManager fragmentManager;
         TextInputEditText code;
         TextView codeError;
+        Context context;
 
         public UserSignUpCallback(TextView result, ProgressBar progressBar
                 , FragmentManager fragmentManager, TextInputEditText code
-                , TextView codeError) {
+                , TextView codeError, Context context) {
             this.result = result;
             this.progressBar = progressBar;
             this.fragmentManager = fragmentManager;
             this.code = code;
             this.codeError = codeError;
+            this.context = context;
         }
 
         @Override
@@ -78,7 +80,7 @@ public class AuthUtils {
                     }
                 });
                 EmailVerificationDialog verificationDialog = new EmailVerificationDialog(code, progressBar,
-                        fragmentManager, codeError);
+                        fragmentManager, codeError, context);
                 verificationDialog.show(fragmentManager, "Verify Email");
                 //
             } else {
@@ -92,13 +94,15 @@ public class AuthUtils {
         ProgressBar progressBar;
         FragmentManager fragmentManager;
         TextView codeError;
+        Context context;
 
         public EmailVerificationDialog(TextInputEditText code, ProgressBar progressBar
-                , FragmentManager fragmentManager, TextView codeError) {
+                , FragmentManager fragmentManager, TextView codeError, Context context) {
             this.code = code;
             this.progressBar = progressBar;
             this.fragmentManager = fragmentManager;
             this.codeError = codeError;
+            this.context = context;
         }
 
         @Nullable
@@ -135,9 +139,10 @@ public class AuthUtils {
                                     //
 
                                     // Go to Home
-                                    Intent intent = new Intent(getContext(), Home.class);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                    startActivity(intent);
+                                    Intent intent = new Intent(context, Home.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    context.startActivity(intent);
+
                                 } else {
                                     codeError.setText(R.string.incorrect_code);
                                     codeError.setTextColor(Color.RED);
@@ -177,7 +182,7 @@ public class AuthUtils {
                 status.setVisibility(View.VISIBLE);
                 // move to home page
                 Intent intent = new Intent(context, Home.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
                 //
             } else {

@@ -59,12 +59,12 @@ public class MainActivity extends AppCompatActivity {
 
         if (currentUser != null) {
             status.setTextColor(Color.GREEN);
-            status.setText(getString(R.string.already_logged) + currentUser.getUsername());
+            status.setText(String.format("%s%s", getString(R.string.already_logged), currentUser.getUsername()));
             status.setVisibility(View.VISIBLE);
 
             // Go to Home
             Intent intent = new Intent(this, Home.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         }
         setLoginViews();

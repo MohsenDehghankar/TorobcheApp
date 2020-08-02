@@ -36,4 +36,6 @@
     <string name="logout_tmp_btn">Logout (tmp btn)</string>
     <string name="logout">Logged Out</string>
     <string name="already_logged">\"Already Logged In: \"</string>
+    <string name="logout_settings">Logout</string>
+    <string name="help_and_feedback">Help and Feedback</string>
 </resources>

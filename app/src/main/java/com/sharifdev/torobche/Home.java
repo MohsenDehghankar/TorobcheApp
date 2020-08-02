@@ -5,10 +5,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.parse.LogOutCallback;
+import com.parse.ParseException;
+import com.parse.ParseUser;
 import com.sharifdev.torobche.Activity.ActivityFragment;
 import com.sharifdev.torobche.Chat.ChatFragment;
 import com.sharifdev.torobche.Game.GameFragment;
@@ -21,7 +29,9 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-
+        // todo app bar
+        MaterialToolbar toolbar = (MaterialToolbar) findViewById(R.id.appbar);
+        setSupportActionBar(toolbar);
 
         BottomNavigationView navigationBar = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         navigationBar.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
@@ -36,12 +46,12 @@ public class Home extends AppCompatActivity {
     private void loadFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_container, fragment);
-        transaction.addToBackStack(null);
+//        transaction.addToBackStack(null);
         transaction.commit();
     }
 
     /**
-    * listener for navigation bottom menu
+     * listener for navigation bottom menu
      **/
     private BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -66,5 +76,34 @@ public class Home extends AppCompatActivity {
     };
 
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.appbar_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        switch (id) {
+            case R.id.logout_appbar:
+                ParseUser.logOutInBackground(new LogOutCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        if (e == null) {
+                            finish();
+                        } else {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                break;
+            case R.id.help_appbar:
+                // todo
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }
