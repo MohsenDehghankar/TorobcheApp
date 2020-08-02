@@ -118,8 +118,7 @@ public class AuthUtils {
             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int id) {
-                    // sign in the user ...
-                    // todo sign up complete
+                    // verify code
                     progressBar.setVisibility(View.VISIBLE);
                     HashMap<String, Object> params = new HashMap<>();
                     params.put("code", input.getText().toString());
@@ -161,10 +160,12 @@ public class AuthUtils {
     public static class UserLoginCallback implements LogInCallback {
         TextView status;
         ProgressBar progressBar;
+        Context context;
 
-        public UserLoginCallback(TextView status, ProgressBar progressBar) {
+        public UserLoginCallback(TextView status, ProgressBar progressBar, Context context) {
             this.status = status;
             this.progressBar = progressBar;
+            this.context = context;
         }
 
         @Override
@@ -174,7 +175,11 @@ public class AuthUtils {
                 status.setText(R.string.login_suc);
                 status.setTextColor(Color.GREEN);
                 status.setVisibility(View.VISIBLE);
-                // todo move to home page
+                // move to home page
+                Intent intent = new Intent(context, Home.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                context.startActivity(intent);
+                //
             } else {
                 status.setTextColor(Color.RED);
                 status.setVisibility(View.VISIBLE);

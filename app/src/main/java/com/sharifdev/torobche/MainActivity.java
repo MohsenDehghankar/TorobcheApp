@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.VISIBLE);
                 ParseUser.logInInBackground(((TextInputEditText) findViewById(R.id.username_inp_login2)).getText().toString()
                         , ((TextInputEditText) findViewById(R.id.password_inp_login2)).getText().toString()
-                        , new AuthUtils.UserLoginCallback(loginStatus, progressBar));
+                        , new AuthUtils.UserLoginCallback(loginStatus, progressBar, getApplicationContext()));
             }
         });
     }

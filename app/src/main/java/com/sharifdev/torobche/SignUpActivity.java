@@ -100,7 +100,6 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // todo
         //ParseUser.logOut();
     }
 }
