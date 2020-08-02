@@ -5,41 +5,46 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
     <Button
-        android:id="@+id/cancel_category"
+        android:id="@+id/cancel_question"
         style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="155dp"
-        android:layout_height="55dp"
+        android:layout_width="159dp"
+        android:layout_height="45dp"
         android:layout_marginStart="16dp"
         android:gravity="center"
         android:text="Cancel"
-        android:backgroundTint ="#FFFFFF"
-        android:textColor="#3B53D5"
+        android:textColor ="#FFFFFF"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/save_category"
+        android:id="@+id/save_question"
         style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="155dp"
-        android:layout_height="55dp"
+        android:layout_width="159dp"
+        android:layout_height="45dp"
         android:gravity="center"
-        android:backgroundTint ="#FFFFFF"
+        android:textColor ="#FFFFFF"
         android:text="Save"
-        android:textColor="#3B53D5"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.552"
-        app:layout_constraintStart_toEndOf="@+id/cancel_category" />
+        app:layout_constraintStart_toEndOf="@+id/cancel_question" />
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <GridView
         android:id="@+id/category_select_view"
-        android:layout_width="414dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:horizontalSpacing="10dp"

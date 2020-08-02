@@ -1,48 +1,32 @@
 package com.sharifdev.torobche;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.sharifdev.torobche.Category.CategoryRecyclerViewAdapter;
+import com.sharifdev.torobche.Category.SelectCategoryActivity;
+
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
 
 public class HomeFragment extends Fragment {
     private static RecyclerView category_view;
     private  RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
-    private ArrayList<Integer> categoryDataSet = new ArrayList<>();
+    private ArrayList<SelectCategoryActivity.HolderClass> categoryDataSet = new ArrayList<>();
     private Button add_category;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View rootView =  inflater.inflate(R.layout.fragment_home, container, false);
 
         initCategoryView(rootView, container.getContext());
-
-        add_category =(Button) rootView.findViewById(R.id.add_category);
-        add_category.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), SelectCategoryActivity.class);
-                startActivity(intent);
-            }
-        });
-
         return rootView;
     }
 
@@ -54,12 +38,11 @@ public class HomeFragment extends Fragment {
                 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         category_view.setLayoutManager(layoutManager);
 
-        // specify an adapter (see also next example)
-        for(int i= 0; i< 10; i++) {
-            // todo read
-            categoryDataSet.add(R.drawable.ic_launcher_background);
-        }
-        mAdapter = new CategoryRecyclerViewAdapter(categoryDataSet);
+        // todo
+        for(int i = 0 ; i< 10 ; i ++)
+            categoryDataSet.add(new SelectCategoryActivity.HolderClass("android"+ i, R.drawable.ic_launcher_background));
+
+        mAdapter = new CategoryRecyclerViewAdapter(getContext(),categoryDataSet);
         category_view.setAdapter(mAdapter);
     }
 
@@ -67,11 +50,6 @@ public class HomeFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
 
-    }
-    private ImageView createImageView(Context context){
-        ImageView imageView = new ImageView(context);
-        imageView.setImageResource(R.drawable.ic_launcher_background);
-        return imageView;
     }
 
 }

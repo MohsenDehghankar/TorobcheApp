@@ -1,6 +1,6 @@
-package com.sharifdev.torobche;
+package com.sharifdev.torobche.Category;
 
-import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,58 +14,72 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.sharifdev.torobche.R;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.zip.Inflater;
 
 public class SelectCategoryActivity extends AppCompatActivity {
-    public static ArrayList<CategoryClass> categoryClasses = new ArrayList<>();
-    private ArrayList<CategoryClass> selectedCategory;
+    public static ArrayList<HolderClass> holderClasses;
+    private ArrayList<HolderClass> selectedCategory;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select_category_activity);
 
-        categoryClasses.add(new CategoryClass("android" , R.drawable.ic_launcher_background));
-        categoryClasses.add(new CategoryClass("android" , R.drawable.ic_launcher_background));
+        selectedCategory = new ArrayList<>();
+        holderClasses = new ArrayList<>();
+        holderClasses.add(new HolderClass("android" , R.drawable.ic_launcher_background));
+        holderClasses.add(new HolderClass("android" , R.drawable.ic_launcher_foreground));
 
         GridView gridView = findViewById(R.id.category_select_view);
-        gridView.setAdapter(new CategoryAdapter(categoryClasses));
+        gridView.setAdapter(new CategoryAdapter(holderClasses));
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                selectedCategory.add(categoryClasses.get(i));
+                Drawable highlight = getResources().getDrawable(R.drawable.highlight);
+                view.findViewById(R.id.select_category_item_image).setBackground(highlight);
+                selectedCategory.add(holderClasses.get(i));
             }
         });
 
-        Button save = (Button) findViewById(R.id.save_category);
+        Button cancel = (Button) findViewById(R.id.cancel_question);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+
+        Button save = (Button) findViewById(R.id.save_question);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 // todo save selected array in account
+                finish();
             }
         });
 
     }
 
-    public static class CategoryClass {
-        String name;
-        int image;
+    public static class HolderClass {
+        public String name;
+        public int image;
 
-        CategoryClass(String name, int image){
+        public HolderClass(String name, int image){
             this.image = image;
             this.name = name;
         }
     }
 
     public class CategoryAdapter extends BaseAdapter {
-        private final List<CategoryClass> items;
+        private final List<HolderClass> items;
 
-        public CategoryAdapter(List<CategoryClass> items) {
+        public CategoryAdapter(List<HolderClass> items) {
             this.items = items;
         }
 
@@ -91,7 +105,7 @@ public class SelectCategoryActivity extends AppCompatActivity {
 
             if (view == null) {
                 LayoutInflater inflter = (LayoutInflater.from(getApplicationContext()));
-                view = inflter.inflate(R.layout.select_vategory_item, null);
+                view = inflter.inflate(R.layout.select_category_item, null);
             }
 
             imageView = (ImageView) view.findViewById(R.id.select_category_item_image);
