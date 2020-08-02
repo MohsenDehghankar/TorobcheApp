@@ -40,7 +40,7 @@ public class ActivityFragment extends Fragment {
 
         // todo get history from server
         for(int i = 0 ; i< 10 ; i ++)
-            histories.add(R.drawable.ic_launcher_background);
+            histories.add(R.drawable.history);
 
         HistoryAdapter mAdapter = new HistoryAdapter(getContext(),histories);
         historyRecyclerView.setAdapter(mAdapter);
@@ -57,7 +57,7 @@ public class ActivityFragment extends Fragment {
 
         // todo get all quizzes from server
         for(int i = 0 ; i< 10 ; i ++)
-            quizzes.add( new SelectCategoryActivity.HolderClass("quiz"+ i, R.drawable.ic_launcher_background));
+            quizzes.add( new SelectCategoryActivity.HolderClass("quiz"+ i, R.drawable.quiz));
 
         QuizAdapter mAdapter = new QuizAdapter(getContext(), quizzes);
         quizRecyclerView.setAdapter(mAdapter);
@@ -74,7 +74,7 @@ public class ActivityFragment extends Fragment {
 
         // todo
         for(int i = 0 ; i< 10 ; i ++)
-            questions.add(new SelectCategoryActivity.HolderClass("question"+ i, R.drawable.ic_launcher_background));
+            questions.add(new SelectCategoryActivity.HolderClass("question"+ i, R.drawable.question));
 
         QuestionAdapter mAdapter = new QuestionAdapter(getContext(), questions);
         questionRecyclerView.setAdapter(mAdapter);
