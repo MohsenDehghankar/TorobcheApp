@@ -41,18 +41,17 @@ public class HomeFragment extends Fragment {
     private void loadUserData(final View view) {
         final ParseUser user = ParseUser.getCurrentUser();
         final ImageView profile = view.findViewById(R.id.profile_avatar);
-        /*user.fetchIfNeededInBackground(new GetCallback<ParseObject>() {
+        user.fetchInBackground(new GetCallback<ParseObject>() {
             @Override
             public void done(ParseObject object, ParseException e) {
                 if (e == null) {
-
                     profile.setImageDrawable(view.getResources().getDrawable(ProfileAvatar
                             .getAvatarResourceId(((int) user.get("avatar_id")))));
                 } else {
                     e.printStackTrace();
                 }
             }
-        });*/
+        });
     }
 
     private void initCategoryView(View rootView, Context context) {
