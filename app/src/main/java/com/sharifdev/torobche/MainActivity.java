@@ -25,13 +25,10 @@ public class MainActivity extends AppCompatActivity {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
 
-//        // show login page
-//        setContentView(R.layout.login);
-//        checkLocalUser();
-//
-        Intent intent = new Intent(this, Home.class);
-        startActivity(intent);
-
+        // Show login page
+        setContentView(R.layout.login);
+        // check if user already logged in, Go to Home
+        checkLocalUser();
     }
 
     private void checkLocalUser() {
@@ -62,8 +59,13 @@ public class MainActivity extends AppCompatActivity {
 
         if (currentUser != null) {
             status.setTextColor(Color.GREEN);
-            status.setText("Already Logged In: " + currentUser.getUsername());
+            status.setText(getString(R.string.already_logged) + currentUser.getUsername());
             status.setVisibility(View.VISIBLE);
+
+            // Go to Home
+            Intent intent = new Intent(this, Home.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
         }
         setLoginViews();
     }
@@ -94,6 +96,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ParseUser.logOut();
+        //ParseUser.logOut();
     }
 }

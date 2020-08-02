@@ -3,6 +3,7 @@ package com.sharifdev.torobche.backUtils;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
@@ -28,6 +29,7 @@ import com.parse.ParseCloud;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
+import com.sharifdev.torobche.Home;
 import com.sharifdev.torobche.R;
 
 import org.w3c.dom.Text;
@@ -127,16 +129,21 @@ public class AuthUtils {
                             progressBar.setVisibility(View.GONE);
                             if (e == null) {
                                 if (object) {
-                                    // todo : go to Home Page
+                                    // Go to Home Page
                                     codeError.setTextColor(Color.GREEN);
                                     codeError.setText(R.string.verified);
                                     codeError.setVisibility(View.VISIBLE);
                                     //
+
+                                    // Go to Home
+                                    Intent intent = new Intent(getContext(), Home.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    startActivity(intent);
                                 } else {
                                     codeError.setText(R.string.incorrect_code);
                                     codeError.setTextColor(Color.RED);
                                     codeError.setVisibility(View.VISIBLE);
-                                    // todo delete currently created user
+                                    // Delete currently created user
                                     ParseUser.getCurrentUser().deleteInBackground();
                                     ParseUser.logOutInBackground();
                                 }

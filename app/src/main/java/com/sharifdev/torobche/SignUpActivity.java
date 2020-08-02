@@ -101,6 +101,6 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         // todo
-        ParseUser.logOut();
+        //ParseUser.logOut();
     }
 }
