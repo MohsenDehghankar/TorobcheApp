@@ -49,16 +49,9 @@ public class SelectCategoryActivity extends AppCompatActivity {
             }
         });
 
-
+        // save selected categories
         Button save = (Button) findViewById(R.id.save_question);
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                // todo save selected array in account
-                finish();
-            }
-        });
+        save.setOnClickListener(new CategoryUtils.SaveCategoryOnClockListener(this));
 
     }
 
@@ -128,6 +121,10 @@ public class SelectCategoryActivity extends AppCompatActivity {
             textView.setText(items.get(i).name);
             return view;
         }
+    }
+
+    public ArrayList<HolderClass> getSelectedCategory() {
+        return selectedCategory;
     }
 }
 
