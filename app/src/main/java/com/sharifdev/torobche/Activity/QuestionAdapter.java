@@ -15,7 +15,7 @@ import com.sharifdev.torobche.R;
 
 import java.util.List;
 
-public class QuestionAdapter extends RecyclerView.Adapter<CategoryRecyclerViewAdapter.ViewHolder> {
+public class QuestionAdapter extends RecyclerView.Adapter<ImageHolder> {
 
     private final List<SelectCategoryActivity.HolderClass> mValues;
     private Context context;
@@ -26,7 +26,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<CategoryRecyclerViewAd
     }
 
     @Override
-    public CategoryRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ImageHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LinearLayout view;
         if (viewType == R.layout.single_image_layout) {
             view = (LinearLayout) LayoutInflater.from(parent.getContext())
@@ -35,7 +35,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<CategoryRecyclerViewAd
             view = (LinearLayout) LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.add_button_layout, parent, false);
         }
-        return new CategoryRecyclerViewAdapter.ViewHolder(view);
+        return new ImageHolder(view);
     }
 
 
@@ -49,7 +49,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<CategoryRecyclerViewAd
     }
 
     @Override
-    public void onBindViewHolder(final CategoryRecyclerViewAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ImageHolder holder, final int position) {
         if (position == mValues.size()) {
             holder.mImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
