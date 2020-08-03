@@ -7,6 +7,12 @@
     android:orientation="vertical"
     tools:context=".Home">
 
+    <include
+        android:id="@+id/appbar"
+        layout="@layout/appbar"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"/>
+
     <FrameLayout
         android:id="@+id/frame_container"
         android:layout_width="match_parent"

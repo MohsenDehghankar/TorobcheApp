@@ -24,14 +24,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
-
-//        // show login page
-//        setContentView(R.layout.login);
-//        checkLocalUser();
-
-        Intent intent = new Intent(this, Home.class);
-        startActivity(intent);
-
+        Intent i = new Intent(this, Home.class);
+        startActivity(i);
+        // Show login page
+        //setContentView(R.layout.login);
+        // check if user already logged in, Go to Home
+        //checkLocalUser();
     }
 
     private void checkLocalUser() {
@@ -62,8 +60,13 @@ public class MainActivity extends AppCompatActivity {
 
         if (currentUser != null) {
             status.setTextColor(Color.GREEN);
-            status.setText("Already Logged In: " + currentUser.getUsername());
+            status.setText(String.format("%s%s", getString(R.string.already_logged), currentUser.getUsername()));
             status.setVisibility(View.VISIBLE);
+
+            // Go to Home
+            Intent intent = new Intent(this, Home.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         }
         setLoginViews();
     }
@@ -86,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.VISIBLE);
                 ParseUser.logInInBackground(((TextInputEditText) findViewById(R.id.username_inp_login2)).getText().toString()
                         , ((TextInputEditText) findViewById(R.id.password_inp_login2)).getText().toString()
-                        , new AuthUtils.UserLoginCallback(loginStatus, progressBar));
+                        , new AuthUtils.UserLoginCallback(loginStatus, progressBar, getApplicationContext()));
             }
         });
     }
@@ -94,6 +97,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ParseUser.logOut();
+        //ParseUser.logOut();
     }
 }

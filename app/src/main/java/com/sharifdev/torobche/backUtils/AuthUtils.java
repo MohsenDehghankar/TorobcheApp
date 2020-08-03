@@ -3,6 +3,7 @@ package com.sharifdev.torobche.backUtils;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -28,6 +30,7 @@ import com.parse.ParseCloud;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
+import com.sharifdev.torobche.Home;
 import com.sharifdev.torobche.R;
 
 import org.w3c.dom.Text;
@@ -49,15 +52,17 @@ public class AuthUtils {
         FragmentManager fragmentManager;
         TextInputEditText code;
         TextView codeError;
+        Context context;
 
         public UserSignUpCallback(TextView result, ProgressBar progressBar
                 , FragmentManager fragmentManager, TextInputEditText code
-                , TextView codeError) {
+                , TextView codeError, Context context) {
             this.result = result;
             this.progressBar = progressBar;
             this.fragmentManager = fragmentManager;
             this.code = code;
             this.codeError = codeError;
+            this.context = context;
         }
 
         @Override
@@ -76,7 +81,7 @@ public class AuthUtils {
                     }
                 });
                 EmailVerificationDialog verificationDialog = new EmailVerificationDialog(code, progressBar,
-                        fragmentManager, codeError);
+                        fragmentManager, codeError, context);
                 verificationDialog.show(fragmentManager, "Verify Email");
                 //
             } else {
@@ -90,13 +95,15 @@ public class AuthUtils {
         ProgressBar progressBar;
         FragmentManager fragmentManager;
         TextView codeError;
+        Context context;
 
         public EmailVerificationDialog(TextInputEditText code, ProgressBar progressBar
-                , FragmentManager fragmentManager, TextView codeError) {
+                , FragmentManager fragmentManager, TextView codeError, Context context) {
             this.code = code;
             this.progressBar = progressBar;
             this.fragmentManager = fragmentManager;
             this.codeError = codeError;
+            this.context = context;
         }
 
         @Nullable
@@ -116,8 +123,7 @@ public class AuthUtils {
             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int id) {
-                    // sign in the user ...
-                    // todo sign up complete
+                    // verify code
                     progressBar.setVisibility(View.VISIBLE);
                     HashMap<String, Object> params = new HashMap<>();
                     params.put("code", input.getText().toString());
@@ -127,16 +133,22 @@ public class AuthUtils {
                             progressBar.setVisibility(View.GONE);
                             if (e == null) {
                                 if (object) {
-                                    // todo : go to Home Page
+                                    // Go to Home Page
                                     codeError.setTextColor(Color.GREEN);
                                     codeError.setText(R.string.verified);
                                     codeError.setVisibility(View.VISIBLE);
                                     //
+
+                                    // Go to Home
+                                    Intent intent = new Intent(context, Home.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    context.startActivity(intent);
+
                                 } else {
                                     codeError.setText(R.string.incorrect_code);
                                     codeError.setTextColor(Color.RED);
                                     codeError.setVisibility(View.VISIBLE);
-                                    // todo delete currently created user
+                                    // Delete currently created user
                                     ParseUser.getCurrentUser().deleteInBackground();
                                     ParseUser.logOutInBackground();
                                 }
@@ -147,17 +159,22 @@ public class AuthUtils {
                     });
                 }
             }).setView(input);
-            return builder.create();
+            AlertDialog alertDialog = builder.create();
+            alertDialog.setCanceledOnTouchOutside(false);
+            alertDialog.setCancelable(false);
+            return alertDialog;
         }
     }
 
     public static class UserLoginCallback implements LogInCallback {
         TextView status;
         ProgressBar progressBar;
+        Context context;
 
-        public UserLoginCallback(TextView status, ProgressBar progressBar) {
+        public UserLoginCallback(TextView status, ProgressBar progressBar, Context context) {
             this.status = status;
             this.progressBar = progressBar;
+            this.context = context;
         }
 
         @Override
@@ -167,7 +184,11 @@ public class AuthUtils {
                 status.setText(R.string.login_suc);
                 status.setTextColor(Color.GREEN);
                 status.setVisibility(View.VISIBLE);
-                // todo move to home page
+                // move to home page
+                Intent intent = new Intent(context, Home.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+                //
             } else {
                 status.setTextColor(Color.RED);
                 status.setVisibility(View.VISIBLE);

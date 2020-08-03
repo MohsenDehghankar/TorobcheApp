@@ -92,7 +92,7 @@ public class SignUpActivity extends AppCompatActivity {
                         email.getText().toString(),
                         new AuthUtils.UserSignUpCallback(result, progressBar, getSupportFragmentManager()
                                 , ((TextInputEditText) findViewById(R.id.entered_code))
-                                , ((TextView) findViewById(R.id.code_error))));
+                                , ((TextView) findViewById(R.id.code_error)), getApplicationContext()));
             }
         });
     }
@@ -100,7 +100,6 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // todo
-        ParseUser.logOut();
+        //ParseUser.logOut();
     }
 }
