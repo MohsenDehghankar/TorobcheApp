@@ -41,4 +41,6 @@
     <string name="lev_na">Level: NA</string>
     <string name="lev">Level: </string>
     <string name="favorite_topics">Favorite Topics</string>
+    <string name="write_sth_nadd_image">Write sth \\\nAdd image</string>
+    <string name="write_the_question">Write The Question</string>
 </resources>

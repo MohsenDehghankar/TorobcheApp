@@ -45,7 +45,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryHolder> {
                 context.startActivity(intent);*/
             }
         });
-        holder.point.setText("Point: " + String.valueOf(mValues.get(position).pointNum));
+        holder.point.setText("Score: " + String.valueOf(mValues.get(position).pointNum));
         holder.topic.setText(mValues.get(position).topicTxt);
         holder.date.setText(mValues.get(position).dateTxt);
     }
