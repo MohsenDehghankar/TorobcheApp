@@ -15,7 +15,7 @@ import com.sharifdev.torobche.R;
 
 import java.util.List;
 
-public class HistoryAdapter extends RecyclerView.Adapter<CategoryRecyclerViewAdapter.ViewHolder> {
+public class HistoryAdapter extends RecyclerView.Adapter<ImageHolder> {
 
     private final List<Integer> mValues;
     private Context context;
@@ -26,16 +26,16 @@ public class HistoryAdapter extends RecyclerView.Adapter<CategoryRecyclerViewAda
     }
 
     @Override
-    public CategoryRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ImageHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LinearLayout view;
         view = (LinearLayout) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.single_image_layout, parent, false);
 
-        return new CategoryRecyclerViewAdapter.ViewHolder(view);
+        return new ImageHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final CategoryRecyclerViewAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ImageHolder holder, final int position) {
 
         holder.mImageView.setImageResource(mValues.get(position));
         holder.mImageView.setOnClickListener(new View.OnClickListener() {

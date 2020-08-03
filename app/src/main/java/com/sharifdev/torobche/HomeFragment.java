@@ -1,26 +1,34 @@
 package com.sharifdev.torobche;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.parse.GetCallback;
-import com.parse.ParseException;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
+import com.sharifdev.torobche.Adapters.ProfileChooseArrayAdapter;
 import com.sharifdev.torobche.Category.CategoryRecyclerViewAdapter;
 import com.sharifdev.torobche.Category.SelectCategoryActivity;
+import com.sharifdev.torobche.backUtils.CategoryUtils;
 import com.sharifdev.torobche.model.ProfileAvatar;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
     private static RecyclerView category_view;
@@ -31,31 +39,56 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-
         loadUserData(rootView);
-
-        initCategoryView(rootView, container.getContext());
+        changeProfileAvatarView(rootView);
         return rootView;
     }
 
-    private void loadUserData(final View view) {
+    public void loadUserData(View view) {
         final ParseUser user = ParseUser.getCurrentUser();
         final ImageView profile = view.findViewById(R.id.profile_avatar);
-        /*user.fetchIfNeededInBackground(new GetCallback<ParseObject>() {
-            @Override
-            public void done(ParseObject object, ParseException e) {
-                if (e == null) {
-
-                    profile.setImageDrawable(view.getResources().getDrawable(ProfileAvatar
-                            .getAvatarResourceId(((int) user.get("avatar_id")))));
-                } else {
-                    e.printStackTrace();
-                }
-            }
-        });*/
+        profile.setImageDrawable(view.getResources().getDrawable(ProfileAvatar
+                .getAvatarResourceId(((int) user.get("avatar_id")))));
+        TextView username = view.findViewById(R.id.user_id);
+        username.setText("Hi " + user.getUsername() + "!");
+        // todo: update group name
+        TextView level = view.findViewById(R.id.statistic);
+        try {
+            level.setText(getString(R.string.lev) + ((int) user.get("level")));
+        } catch (NullPointerException e) {
+            level.setText(R.string.lev_na);
+        }
+        // user categories
+        try {
+            List<ParseObject> cats = user.getList("FavoriteCategories");
+            CategoryUtils.getCategoriesByPointer(cats, this, view);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    private void initCategoryView(View rootView, Context context) {
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        try {
+            if (data != null && data.getBooleanExtra("saved", false)) {
+                View view = getView();
+                if (view != null)
+                    loadUserData(view);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void changeProfileAvatarView(View view) {
+        ImageView profile = view.findViewById(R.id.profile_avatar);
+        profile.setOnClickListener(new ProfileAvatar
+                .ChangeAvatarBtnListener(getContext(), getActivity(), this, view));
+    }
+
+    public void initCategoryView(View rootView,
+                                 List<ParseObject> cats) {
         category_view = (RecyclerView) rootView.findViewById(R.id.category_recyclerView);
         category_view.setHasFixedSize(true);
         // use a linear layout manager
@@ -63,18 +96,23 @@ public class HomeFragment extends Fragment {
                 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         category_view.setLayoutManager(layoutManager);
 
-        // todo
-        for (int i = 0; i < 10; i++)
-            categoryDataSet.add(new SelectCategoryActivity.HolderClass("android" + i, R.drawable.ic_launcher_background));
+        categoryDataSet = new ArrayList<>();
+        if (cats != null) {
+            for (ParseObject cat : cats) {
+                categoryDataSet.add(new SelectCategoryActivity.HolderClass(
+                        ((String) cat.get("name")),
+                        CategoryUtils.getCategoryImageByID(cat.getInt("icon_id"))
+                ));
+            }
+        }
 
-        mAdapter = new CategoryRecyclerViewAdapter(getContext(), categoryDataSet);
+        mAdapter = new CategoryRecyclerViewAdapter(getContext(), categoryDataSet, this);
         category_view.setAdapter(mAdapter);
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
     }
 
 }

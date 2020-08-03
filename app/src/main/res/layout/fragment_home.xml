@@ -26,44 +26,53 @@
             app:srcCompat ="@mipmap/avatar_1" />
 
         <TextView
-            android:id="@+id/statistic"
+            android:id="@+id/user_id"
             android:layout_width="197dp"
-            android:layout_height="23dp"
+            android:layout_height="35dp"
             android:layout_marginTop="40dp"
-            android:text="statistic"
+            android:fontFamily="@font/acme"
+            android:text="Mohsen"
+            android:textAlignment="center"
+            android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profile_avatar" />
 
         <TextView
+            android:id="@+id/statistic"
+            android:layout_width="197dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="5dp"
+            android:text="level"
+            android:fontFamily="@font/acme"
+            android:textSize="30sp"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/user_id" />
+
+        <TextView
             android:id="@+id/group"
             android:layout_width="197dp"
-            android:layout_height="23dp"
+            android:layout_height="35dp"
             android:layout_marginTop="6dp"
-            android:text="group"
+            android:textAlignment="center"
+            android:fontFamily="@font/acme"
+            android:textSize="30sp"
+            android:text="No Group"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/statistic" />
 
-        <TextView
+        <!--<TextView
             android:id="@+id/medals"
             android:layout_width="197dp"
-            android:layout_height="23dp"
+            android:layout_height="32dp"
             android:layout_marginTop="6dp"
             android:text="medals"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/group" />
-
-        <TextView
-            android:id="@+id/user_id"
-            android:layout_width="197dp"
-            android:layout_height="23dp"
-            android:layout_marginTop="5dp"
-            android:text="user_id"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/medals" />
+            app:layout_constraintTop_toBottomOf="@+id/group" />-->
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -75,11 +84,13 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal"
+        android:layout_marginBottom="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
         app:layout_constraintVertical_bias="1.0" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
