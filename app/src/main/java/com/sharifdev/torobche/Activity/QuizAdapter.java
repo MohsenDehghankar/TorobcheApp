@@ -14,6 +14,8 @@ import com.sharifdev.torobche.Category.CategoryRecyclerViewAdapter;
 import com.sharifdev.torobche.Category.SelectCategoryActivity;
 import com.sharifdev.torobche.R;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 public class QuizAdapter extends RecyclerView.Adapter<ImageHolder> {
@@ -50,7 +52,7 @@ public class QuizAdapter extends RecyclerView.Adapter<ImageHolder> {
     }
 
     @Override
-    public void onBindViewHolder(final ImageHolder holder, final int position) {
+    public void onBindViewHolder(@NotNull final ImageHolder holder, final int position) {
         if (position == mValues.size()) {
             holder.mImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
