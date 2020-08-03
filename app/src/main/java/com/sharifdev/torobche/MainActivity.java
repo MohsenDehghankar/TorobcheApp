@@ -24,12 +24,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
-        Intent i = new Intent(this, Home.class);
-        startActivity(i);
+//        Intent i = new Intent(this, Home.class);
+//        startActivity(i);
+
         // Show login page
-        //setContentView(R.layout.login);
+        setContentView(R.layout.login);
         // check if user already logged in, Go to Home
-        //checkLocalUser();
+        checkLocalUser();
     }
 
     private void checkLocalUser() {

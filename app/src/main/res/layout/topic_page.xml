@@ -11,8 +11,8 @@
 
     <ImageView
         android:id="@+id/topic_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="50dp"
         app:layout_constraintBottom_toTopOf="@+id/textView"
@@ -20,7 +20,7 @@
         app:layout_constraintHorizontal_bias="0.052"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/chat" />
+        />
 
     <TextView
         android:id="@+id/textView"
@@ -50,9 +50,11 @@
         android:id="@+id/topic_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="35dp"
+        android:layout_marginStart="25dp"
+        android:text="Loading..."
         android:layout_marginTop="39dp"
-        android:text="naaaaaame"
+        android:textSize="40sp"
+        android:fontFamily="@font/acme"
         app:layout_constraintStart_toEndOf="@+id/topic_image"
         app:layout_constraintTop_toTopOf="parent" />
 

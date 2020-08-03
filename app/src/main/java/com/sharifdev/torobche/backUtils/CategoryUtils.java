@@ -123,7 +123,7 @@ public class CategoryUtils {
                                               final HomeFragment fragment,
                                               final View view) {
         if (cats == null) {
-            fragment.initCategoryView(view, new ArrayList<ParseObject>());
+            fragment.initCategoryView(view, new ArrayList<ParseObject>(), false);
             return;
         }
 
@@ -140,7 +140,7 @@ public class CategoryUtils {
                 if (e != null)
                     e.printStackTrace();
                 else
-                    fragment.initCategoryView(view, objects);
+                    fragment.initCategoryView(view, objects, false);
             }
         });
     }
