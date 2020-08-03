@@ -61,7 +61,7 @@ public class SelectCategoryActivity extends AppCompatActivity {
 
     public void setUpHolders() {
         GridView gridView = findViewById(R.id.category_select_view);
-        gridView.setAdapter(new CategoryAdapter(holderClasses));
+        gridView.setAdapter(new CategoryAdapter(holderClasses, getApplicationContext()));
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -83,45 +83,7 @@ public class SelectCategoryActivity extends AppCompatActivity {
         }
     }
 
-    public class CategoryAdapter extends BaseAdapter {
-        private final List<HolderClass> items;
 
-        public CategoryAdapter(List<HolderClass> items) {
-            this.items = items;
-        }
-
-        @Override
-        public int getCount() {
-            return items.size();
-        }
-
-        @Override
-        public Object getItem(int i) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int i) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int i, View view, ViewGroup viewGroup) {
-            ImageView imageView;
-            TextView textView;
-
-            if (view == null) {
-                LayoutInflater inflter = (LayoutInflater.from(getApplicationContext()));
-                view = inflter.inflate(R.layout.select_category_item, null);
-            }
-
-            imageView = (ImageView) view.findViewById(R.id.select_category_item_image);
-            textView = (TextView) view.findViewById(R.id.select_category_item_text);
-            imageView.setImageResource(items.get(i).image);
-            textView.setText(items.get(i).name);
-            return view;
-        }
-    }
 
     public ArrayList<HolderClass> getSelectedCategory() {
         return selectedCategory;
