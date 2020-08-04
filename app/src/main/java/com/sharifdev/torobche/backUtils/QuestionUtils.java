@@ -1,16 +1,21 @@
 package com.sharifdev.torobche.backUtils;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.view.View;
 import android.widget.ProgressBar;
 
 import com.parse.FindCallback;
+import com.parse.FunctionCallback;
 import com.parse.Parse;
 import com.parse.ParseCloud;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.sharifdev.torobche.Activity.QuestionMakeActivity;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -24,7 +29,8 @@ public class QuestionUtils {
                                         String choice4Text,
                                         String categoryName,
                                         final ProgressBar progressBar,
-                                        final int answer) {
+                                        final int answer,
+                                        final QuestionMakeActivity activity) {
         final HashMap<String, String> params = new HashMap<>();
         params.put("questionText", questionText);
         params.put("choice1Text", choice1Text);
@@ -32,27 +38,28 @@ public class QuestionUtils {
         params.put("choice3Text", choice3Text);
         params.put("choice4Text", choice4Text);
         params.put("answer", String.valueOf(answer));
+        params.put("topic", categoryName);
 
-        // get the category
-        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Category");
-        query.whereEqualTo("name", categoryName);
-        query.findInBackground(new FindCallback<ParseObject>() {
+        ParseCloud.callFunctionInBackground("save_user_question", params, new FunctionCallback<Object>() {
             @Override
-            public void done(List<ParseObject> objects, ParseException e) {
+            public void done(Object object, ParseException e) {
                 if (e != null)
                     e.printStackTrace();
                 else {
-                    params.put("topic", objects.get(0).getObjectId());
-                    // call function
-                    try {
-                        Object userQuestion = ParseCloud.callFunction("save_user_question", params);
-                    } catch (ParseException ex) {
-                        ex.printStackTrace();
-                    }
+                    progressBar.setVisibility(View.GONE);
                 }
-                progressBar.setVisibility(View.GONE);
+                Intent resultInten = new Intent();
+                resultInten.putExtra("question_added", true);
+                activity.setResult(Activity.RESULT_OK, resultInten);
+                activity.onBackPressed();
             }
         });
 
+
+    }
+
+    public static void getUserQuestions(FunctionCallback<List<ParseObject>> callback) {
+        HashMap<String, String> params = new HashMap<>();
+        ParseCloud.callFunctionInBackground("get_user_questions", params, callback);
     }
 }

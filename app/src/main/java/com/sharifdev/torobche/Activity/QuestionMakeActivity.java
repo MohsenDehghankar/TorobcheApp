@@ -1,25 +1,39 @@
 package com.sharifdev.torobche.Activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.sharifdev.torobche.R;
+import com.sharifdev.torobche.backUtils.CategoryUtils;
 import com.sharifdev.torobche.backUtils.QuestionUtils;
+
+import org.w3c.dom.Text;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class QuestionMakeActivity extends AppCompatActivity {
     private boolean[] answer = new boolean[4];
@@ -48,6 +62,9 @@ public class QuestionMakeActivity extends AppCompatActivity {
         setListeners((ImageView) findViewById(R.id.q_image), 5);
 
         final TextInputEditText topic = findViewById(R.id.topic_inp);
+        topic.setInputType(EditorInfo.TYPE_NULL);
+        TextInputLayout textInputLayout = findViewById(R.id.topic_inp_layout);
+        setTopicPicker(topic, textInputLayout);
 
         Button save = (Button) findViewById(R.id.save_question);
         save.setOnClickListener(new View.OnClickListener() {
@@ -76,11 +93,12 @@ public class QuestionMakeActivity extends AppCompatActivity {
                             ((TextView) findViewById(R.id.c2_text)).getText().toString(),
                             ((TextView) findViewById(R.id.c3_text)).getText().toString(),
                             ((TextView) findViewById(R.id.c4_text)).getText().toString(),
-                            ((TextInputEditText) findViewById(R.id.topic_inp)).getText().toString(),
+                            ((TextInputEditText) findViewById(R.id.topic_inp_layout)).getText().toString(),
                             progressBar,
-                            ans + 1
+                            ans + 1,
+                            QuestionMakeActivity.this
                     );
-                    onBackPressed();
+//                    onBackPressed();
                 }
             }
         });
@@ -169,6 +187,42 @@ public class QuestionMakeActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_LONG).show();
             }
         }
+    }
+
+    private void setTopicPicker(final TextInputEditText topic, TextInputLayout textInputLayout) {
+        topic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
+                final ArrayList<String> items = new ArrayList<>();
+                CategoryUtils.getAllCategories(new FindCallback<ParseObject>() {
+                    @Override
+                    public void done(List<ParseObject> objects, ParseException e) {
+                        if (e != null)
+                            e.printStackTrace();
+                        else {
+                            for (ParseObject object : objects) {
+                                items.add(object.getString("name"));
+                            }
+                        }
+                        final String[] itemsStr = new String[]{};
+                        progressBar.setVisibility(View.GONE);
+                        AlertDialog.Builder builder = new MaterialAlertDialogBuilder(QuestionMakeActivity.this);
+                        builder.setTitle("Choose Topic")
+                                .setSingleChoiceItems(items.toArray(itemsStr), 0, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        topic.setText(items.get(which));
+                                        dialog.dismiss();
+                                    }
+                                })
+                        ;
+                        AlertDialog alertDialog = builder.create();
+                        alertDialog.show();
+                    }
+                });
+            }
+        });
     }
 
 }

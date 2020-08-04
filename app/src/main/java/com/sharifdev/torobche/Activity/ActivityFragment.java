@@ -1,10 +1,13 @@
 package com.sharifdev.torobche.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +18,8 @@ import com.parse.ParseObject;
 import com.sharifdev.torobche.Category.SelectCategoryActivity;
 import com.sharifdev.torobche.R;
 import com.sharifdev.torobche.backUtils.HistoryUtils;
+import com.sharifdev.torobche.backUtils.QuestionUtils;
+import com.sharifdev.torobche.model.Question;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -23,10 +28,14 @@ import java.util.List;
 public class ActivityFragment extends Fragment {
     private ArrayList<HistoryAdapter.HistoryValue> histories = new ArrayList<>();
     private ArrayList<SelectCategoryActivity.HolderClass> quizzes = new ArrayList<>();
-    private ArrayList<SelectCategoryActivity.HolderClass> questions = new ArrayList<>();
+    private ArrayList<Question> questions = new ArrayList<>();
+    private ProgressBar progressBar;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_activity, container, false);
+
+        progressBar = rootView.findViewById(R.id.get_activity_loading);
+        progressBar.setVisibility(View.VISIBLE);
 
         initHistoryRecyclerView(rootView);
 
@@ -43,6 +52,9 @@ public class ActivityFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager
                 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         historyRecyclerView.setLayoutManager(layoutManager);
+
+        HistoryAdapter mAdapter = new HistoryAdapter(getContext(), histories);
+        historyRecyclerView.setAdapter(mAdapter);
 
         HistoryUtils.getUserHistory(new FunctionCallback<List<ParseObject>>() {
             @Override
@@ -81,8 +93,8 @@ public class ActivityFragment extends Fragment {
         quizRecyclerView.setAdapter(mAdapter);
     }
 
-    private void initQuestionRecyclerView(View rootView) {
-        RecyclerView questionRecyclerView = rootView.findViewById(R.id.question_recyclerView);
+    public void initQuestionRecyclerView(View rootView) {
+        final RecyclerView questionRecyclerView = rootView.findViewById(R.id.question_recyclerView);
 
         questionRecyclerView.setHasFixedSize(true);
 
@@ -90,12 +102,52 @@ public class ActivityFragment extends Fragment {
                 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         questionRecyclerView.setLayoutManager(layoutManager);
 
-        // todo
-        for (int i = 0; i < 10; i++)
-            questions.add(new SelectCategoryActivity.HolderClass("question" + i, R.drawable.question));
-
-        QuestionAdapter mAdapter = new QuestionAdapter(getContext(), questions);
+        questions = new ArrayList<>();
+        QuestionAdapter mAdapter = new QuestionAdapter(getContext(), questions, this);
         questionRecyclerView.setAdapter(mAdapter);
+
+
+        QuestionUtils.getUserQuestions(new FunctionCallback<List<ParseObject>>() {
+            @Override
+            public void done(List<ParseObject> object, ParseException e) {
+                questions = new ArrayList<>();
+                if (e != null)
+                    e.printStackTrace();
+                else {
+                    for (ParseObject parseObject : object) {
+                        questions.add(new Question(
+                                parseObject.getString("questionText"),
+                                parseObject.getParseObject("choice1"),
+                                parseObject.getParseObject("choice2"),
+                                parseObject.getParseObject("choice3"),
+                                parseObject.getParseObject("choice4"),
+                                parseObject.getString("topic")
+                        ));
+
+                    }
+                }
+                QuestionAdapter mAdapter = new QuestionAdapter(getContext(), questions, ActivityFragment.this);
+                questionRecyclerView.setAdapter(mAdapter);
+                progressBar.setVisibility(View.GONE);
+            }
+        });
+
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        try {
+            if (data != null && data.getBooleanExtra("question_added", false)) {
+                View view = getView();
+                if (view != null) {
+                    initQuestionRecyclerView(view);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

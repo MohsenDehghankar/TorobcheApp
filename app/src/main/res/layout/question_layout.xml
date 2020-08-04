@@ -255,7 +255,7 @@
         android:layout_width="296dp"
         android:layout_height="55dp"
         android:gravity="center"
-        android:hint="Topic"
+        android:hint="Choose a Topic"
         app:boxStrokeColor="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -263,16 +263,31 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/topic_inp"
+            android:focusableInTouchMode="false"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="none" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+    <!--<TextView
+        android:id="@+id/topic_inp_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="296dp"
+        android:layout_height="55dp"
+        android:gravity="center"
+        android:hint="Choose a Topic"
+        app:boxStrokeColor="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />-->
+
+
+        </com.google.android.material.textfield.TextInputLayout>
 
     <ProgressBar
         android:id="@+id/save_ques"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

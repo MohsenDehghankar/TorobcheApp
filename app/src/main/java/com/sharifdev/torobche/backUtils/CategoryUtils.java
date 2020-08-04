@@ -50,6 +50,11 @@ public class CategoryUtils {
 
     }
 
+    public static void getAllCategories(FindCallback<ParseObject> callback) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Category");
+        query.findInBackground(callback);
+    }
+
     public static int getCategoryImageByID(int id) {
         switch (id) {
             case 1:

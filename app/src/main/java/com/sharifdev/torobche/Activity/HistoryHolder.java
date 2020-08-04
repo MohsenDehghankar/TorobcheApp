@@ -23,5 +23,8 @@ public class HistoryHolder extends RecyclerView.ViewHolder {
         date = view.findViewById(R.id.date1);
         topic = view.findViewById(R.id.topic_name1);
         point = view.findViewById(R.id.point1);
+        if (imageView == null) {
+            imageView = view.findViewById(R.id.select_category_item_image);
+        }
     }
 }
