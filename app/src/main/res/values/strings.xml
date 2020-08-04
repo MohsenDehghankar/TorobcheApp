@@ -44,4 +44,5 @@
     <string name="write_sth_nadd_image">Write sth \\\nAdd image</string>
     <string name="write_the_question">Write The Question</string>
     <string name="choose_a_topic">Choose a Topic...</string>
+    <string name="edit">Edit</string>
 </resources>

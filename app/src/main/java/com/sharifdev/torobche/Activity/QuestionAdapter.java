@@ -73,6 +73,9 @@ public class QuestionAdapter extends RecyclerView.Adapter<HistoryHolder> {
                 @Override
                 public void onClick(View view) {
                     // todo show question
+                    Intent intent = new Intent(context, QuestionMakeActivity.class);
+                    intent.putExtra("questionId", mValues.get(position).getObjId());
+                    fragment.startActivityForResult(intent, 1);
                 }
             });
         }

@@ -9,12 +9,14 @@ public class Question {
     String text;
     ParseObject[] choices = new ParseObject[]{};
     String topic;
+    String objId;
 
     public Question(String text, ParseObject choice1,
                     ParseObject choice2,
                     ParseObject choice3,
                     ParseObject choice4,
-                    String topic) {
+                    String topic,
+                    String objId) {
         this.text = text;
         this.topic = topic;
         this.choices = new ParseObject[]{
@@ -23,6 +25,7 @@ public class Question {
                 choice3,
                 choice4
         };
+        this.objId = objId;
     }
 
     public String getText() {
@@ -31,5 +34,9 @@ public class Question {
 
     public String getTopic() {
         return topic;
+    }
+
+    public String getObjId() {
+        return objId;
     }
 }

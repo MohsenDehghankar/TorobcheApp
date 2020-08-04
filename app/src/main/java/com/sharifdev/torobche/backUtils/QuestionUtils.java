@@ -3,8 +3,11 @@ package com.sharifdev.torobche.backUtils;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.parse.FindCallback;
 import com.parse.FunctionCallback;
 import com.parse.Parse;
@@ -14,6 +17,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.sharifdev.torobche.Activity.QuestionMakeActivity;
+import com.sharifdev.torobche.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -62,4 +66,38 @@ public class QuestionUtils {
         HashMap<String, String> params = new HashMap<>();
         ParseCloud.callFunctionInBackground("get_user_questions", params, callback);
     }
+
+    public static void getQuestionForEdit(String id, final QuestionMakeActivity activity) {
+        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("UserQuestions");
+        query.whereEqualTo("objectId", id);
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> objects, ParseException e) {
+                if (e != null)
+                    e.printStackTrace();
+                else {
+                    // todo get the answer of question too
+                    TextInputEditText topic = activity.findViewById(R.id.topic_inp);
+                    EditText choice1 = activity.findViewById(R.id.c1_text);
+                    EditText choice2 = activity.findViewById(R.id.c2_text);
+                    EditText choice3 = activity.findViewById(R.id.c3_text);
+                    EditText choice4 = activity.findViewById(R.id.c4_text);
+                    EditText questionTxt = activity.findViewById(R.id.q_text);
+
+                    topic.setText(objects.get(0).getString("topic"));
+                    questionTxt.setText(objects.get(0).getString("questionText"));
+                    try {
+                        choice1.setText(objects.get(0).getParseObject("choice1").fetchIfNeeded().getString("text"));
+                        choice2.setText(objects.get(0).getParseObject("choice2").fetchIfNeeded().getString("text"));
+                        choice3.setText(objects.get(0).getParseObject("choice3").fetchIfNeeded().getString("text"));
+                        choice4.setText(objects.get(0).getParseObject("choice4").fetchIfNeeded().getString("text"));
+                    } catch (ParseException | NullPointerException ex) {
+                        ex.printStackTrace();
+                    }
+                    activity.getProgressBar().setVisibility(View.GONE);
+                }
+            }
+        });
+    }
+
 }

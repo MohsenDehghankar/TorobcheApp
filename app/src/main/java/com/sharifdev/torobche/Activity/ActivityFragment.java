@@ -121,7 +121,8 @@ public class ActivityFragment extends Fragment {
                                 parseObject.getParseObject("choice2"),
                                 parseObject.getParseObject("choice3"),
                                 parseObject.getParseObject("choice4"),
-                                parseObject.getString("topic")
+                                parseObject.getString("topic"),
+                                parseObject.getObjectId()
                         ));
 
                     }

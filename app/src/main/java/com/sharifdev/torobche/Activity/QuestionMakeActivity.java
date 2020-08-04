@@ -45,8 +45,10 @@ public class QuestionMakeActivity extends AppCompatActivity {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.question_layout);
-
         progressBar = findViewById(R.id.save_ques);
+
+        // edit current question
+        editCurrentQuestion();
 
         choice = new ImageView[]{
                 (ImageView) findViewById(R.id.imageView1),
@@ -225,4 +227,17 @@ public class QuestionMakeActivity extends AppCompatActivity {
         });
     }
 
+    private void editCurrentQuestion() {
+        Button save = findViewById(R.id.save_question);
+        String questionId = getIntent().getStringExtra("questionId");
+        if (questionId != null) {
+            save.setText(R.string.edit);
+            progressBar.setVisibility(View.VISIBLE);
+            QuestionUtils.getQuestionForEdit(questionId, this);
+        }
+    }
+
+    public ProgressBar getProgressBar() {
+        return progressBar;
+    }
 }
