@@ -15,12 +15,14 @@ import com.sharifdev.torobche.Home;
 import com.sharifdev.torobche.R;
 import com.sharifdev.torobche.model.Question;
 
+import java.util.ArrayList;
+
 public class GameQuestionActivity extends AppCompatActivity {
-    private int q_number = 1;
+    private int q_number = 0;
     private Button next;
     Handler handelr = new Handler();
-    boolean goToNext = false;
-
+    Runnable runnable;
+    ArrayList<Integer> answers = new ArrayList<>(10);
 
 
     @Override
@@ -28,11 +30,18 @@ public class GameQuestionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_question);
 
+        setAnswer((ImageView) findViewById(R.id.imageView1));
+        setAnswer((ImageView) findViewById(R.id.imageView2));
+        setAnswer((ImageView) findViewById(R.id.imageView3));
+        setAnswer((ImageView) findViewById(R.id.imageView4));
+
         next = (Button) findViewById(R.id.next_question);
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (q_number == 10) {
+                    //todo show correct answer
+                    saveAnswer();
                     Intent i = new Intent(getApplicationContext(), Home.class);
                     startActivity(i);
                     //todo add to score
@@ -40,14 +49,51 @@ public class GameQuestionActivity extends AppCompatActivity {
                 }
                 if (q_number < 10) {
                     //todo show correct answer
-                    //todo save the user answer
+                    saveAnswer();
                     //todo get random question
                     setQuestion(new Question());
                 }
             }
         });
 
-        setTimeBar();
+        setQuestion(new Question());
+
+    }
+
+    private void saveAnswer(){
+        ImageView imageView = (ImageView) findViewById(R.id.imageView1);
+        if(imageView.getDrawable().getConstantState() ==getResources().getDrawable(R.drawable.correct).getConstantState()){
+            answers.set(q_number,1);
+            return;
+        }
+        imageView = (ImageView) findViewById(R.id.imageView2);
+        if(imageView.getDrawable().getConstantState() ==getResources().getDrawable(R.drawable.correct).getConstantState()){
+            answers.set(q_number,2);
+            return;
+        }
+        imageView = (ImageView) findViewById(R.id.imageView3);
+        if(imageView.getDrawable().getConstantState() ==getResources().getDrawable(R.drawable.correct).getConstantState()){
+            answers.set(q_number,3);
+            return;
+        }
+        imageView = (ImageView) findViewById(R.id.imageView4);
+        if(imageView.getDrawable().getConstantState() ==getResources().getDrawable(R.drawable.correct).getConstantState()){
+            answers.set(q_number,4);
+        }
+    }
+
+    public void setAnswer(final ImageView imageView){
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(imageView.getDrawable().getConstantState() ==getResources().getDrawable(R.drawable.wrong).getConstantState()){
+                    imageView.setImageResource(R.drawable.correct);
+                }
+                else{
+                    imageView.setImageResource(R.drawable.wrong);
+                }
+            }
+        });
     }
 
     /**
@@ -66,16 +112,14 @@ public class GameQuestionActivity extends AppCompatActivity {
     }
 
     private void fillComponent(int imageId, int imageResource, int textId, String text) {
-        ImageView q_1_image = findViewById(imageId);
-        q_1_image.setImageResource(imageResource);
+        ImageView image = findViewById(imageId);
+        image.setImageResource(imageResource);
 
-        EditText q_1_text = findViewById(textId);
-        q_1_text.setText(text);
+        EditText q_text = findViewById(textId);
+        q_text.setText(text);
     }
 
     private void setTimeBar() {
         final ProgressBar timeBar = findViewById(R.id.time_bar);
-
-        //todo
     }
 }
