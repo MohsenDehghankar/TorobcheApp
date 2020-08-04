@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 //        Intent i = new Intent(this, Home.class);
 //        startActivity(i);
-
+      
         // Show login page
         setContentView(R.layout.login);
         // check if user already logged in, Go to Home
@@ -98,6 +98,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        //ParseUser.logOut();
+        ParseUser.logOut();
     }
 }

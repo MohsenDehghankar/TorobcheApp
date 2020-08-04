@@ -41,6 +41,13 @@ public class GameFragment extends Fragment {
         });
 
         Button group_button = (Button) rootView.findViewById(R.id.gp_btn);
+        group_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i =new  Intent(getActivity().getApplicationContext(), GameQuestionActivity.class);
+                startActivity(i);
+            }
+        });
 
 
         return rootView;

@@ -38,7 +38,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<HistoryHolder> {
                     .inflate(R.layout.history_card, parent, false);
         } else {
             view = (LinearLayout) LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.add_button_layout, parent, false);
+                    .inflate(R.layout.add_button, parent, false);
         }
         return new HistoryHolder(view);
     }

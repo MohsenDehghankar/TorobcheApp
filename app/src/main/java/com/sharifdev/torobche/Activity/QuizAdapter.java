@@ -40,7 +40,7 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizHolder> {
                     .inflate(R.layout.history_card, parent, false);
         } else {
             view = (LinearLayout) LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.add_button_layout, parent, false);
+                    .inflate(R.layout.add_button, parent, false);
         }
         return new QuizHolder(view);
     }
