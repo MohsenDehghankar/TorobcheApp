@@ -68,7 +68,7 @@ public class QuestionMakeActivity extends AppCompatActivity {
         TextInputLayout textInputLayout = findViewById(R.id.topic_inp_layout);
         setTopicPicker(topic, textInputLayout);
 
-        Button save = (Button) findViewById(R.id.save_question);
+        final Button save = (Button) findViewById(R.id.save_question);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,6 +87,10 @@ public class QuestionMakeActivity extends AppCompatActivity {
                 } else if (selected > 1) {
                     Toast.makeText(getApplicationContext(), "Select Just One Answer", Toast.LENGTH_SHORT).show();
                 } else {
+                    // todo edit
+                    if (save.getText().equals(getString(R.string.edit)))
+                        onBackPressed();
+
                     // save question
                     progressBar.setVisibility(View.VISIBLE);
                     QuestionUtils.saveUserQuestion(
