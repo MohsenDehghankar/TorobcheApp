@@ -34,7 +34,7 @@ public class QuizAdapter extends RecyclerView.Adapter<ImageHolder> {
                     .inflate(R.layout.single_image_layout, parent, false);
         } else {
             view = (LinearLayout) LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.add_button_layout, parent, false);
+                    .inflate(R.layout.add_button, parent, false);
         }
         return new ImageHolder(view);
     }
