@@ -50,6 +50,11 @@ public class CategoryUtils {
 
     }
 
+    public static void getAllCategories(FindCallback<ParseObject> callback) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Category");
+        query.findInBackground(callback);
+    }
+
     public static int getCategoryImageByID(int id) {
         switch (id) {
             case 1:
@@ -69,6 +74,31 @@ public class CategoryUtils {
             case 8:
                 return R.drawable.ic_tv;
             case 9:
+                return R.drawable.ic_music;
+            default:
+                return R.drawable.ic_general;
+        }
+    }
+
+    public static int getCategoryImageByName(String catName) {
+        switch (catName) {
+            case "Technology":
+                return R.drawable.ic_technology;
+            case "Sports":
+                return R.drawable.ic_sport;
+            case "Games":
+                return R.drawable.ic_games;
+            case "History":
+                return R.drawable.ic_history;
+            case "Food":
+                return R.drawable.ic_food;
+            case "Education":
+                return R.drawable.ic_education;
+            case "Business":
+                return R.drawable.ic_business;
+            case "TV":
+                return R.drawable.ic_tv;
+            case "Music":
                 return R.drawable.ic_music;
             default:
                 return R.drawable.ic_general;
@@ -123,7 +153,7 @@ public class CategoryUtils {
                                               final HomeFragment fragment,
                                               final View view) {
         if (cats == null) {
-            fragment.initCategoryView(view, new ArrayList<ParseObject>());
+            fragment.initCategoryView(view, new ArrayList<ParseObject>(), false);
             return;
         }
 
@@ -140,7 +170,7 @@ public class CategoryUtils {
                 if (e != null)
                     e.printStackTrace();
                 else
-                    fragment.initCategoryView(view, objects);
+                    fragment.initCategoryView(view, objects, false);
             }
         });
     }

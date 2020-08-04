@@ -13,6 +13,8 @@ public class ImageHolder extends RecyclerView.ViewHolder {
     public ImageHolder(LinearLayout view) {
         super(view);
         mImageView = view.findViewById(R.id.category_image);
+        if (mImageView == null)
+            mImageView = view.findViewById(R.id.select_category_item_image);
     }
 
 }

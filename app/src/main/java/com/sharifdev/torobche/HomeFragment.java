@@ -58,7 +58,9 @@ public class HomeFragment extends Fragment {
         } catch (NullPointerException e) {
             level.setText(R.string.lev_na);
         }
+
         // user categories
+        initCategoryView(view, new ArrayList<ParseObject>(), true);
         try {
             List<ParseObject> cats = user.getList("FavoriteCategories");
             CategoryUtils.getCategoriesByPointer(cats, this, view);
@@ -88,7 +90,7 @@ public class HomeFragment extends Fragment {
     }
 
     public void initCategoryView(View rootView,
-                                 List<ParseObject> cats) {
+                                 List<ParseObject> cats, boolean loading) {
         category_view = (RecyclerView) rootView.findViewById(R.id.category_recyclerView);
         category_view.setHasFixedSize(true);
         // use a linear layout manager
@@ -97,12 +99,16 @@ public class HomeFragment extends Fragment {
         category_view.setLayoutManager(layoutManager);
 
         categoryDataSet = new ArrayList<>();
-        if (cats != null) {
-            for (ParseObject cat : cats) {
-                categoryDataSet.add(new SelectCategoryActivity.HolderClass(
-                        ((String) cat.get("name")),
-                        CategoryUtils.getCategoryImageByID(cat.getInt("icon_id"))
-                ));
+        if (loading){
+            categoryDataSet.add(new SelectCategoryActivity.HolderClass("Loading...", R.drawable.ic_loading));
+        }else {
+            if (cats != null) {
+                for (ParseObject cat : cats) {
+                    categoryDataSet.add(new SelectCategoryActivity.HolderClass(
+                            ((String) cat.get("name")),
+                            CategoryUtils.getCategoryImageByID(cat.getInt("icon_id"))
+                    ));
+                }
             }
         }
 

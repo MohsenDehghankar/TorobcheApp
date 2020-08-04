@@ -23,7 +23,7 @@ public class GameFragment extends Fragment {
                 ChooseTopicFragment fragment= new ChooseTopicFragment();
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.frame_container, fragment, "choose_topic_fragment")
-                        .addToBackStack(null)
+                        //.addToBackStack(null)
                         .commit();
             }
         });
@@ -35,7 +35,7 @@ public class GameFragment extends Fragment {
                 ChooseTopicFragment fragment= new ChooseTopicFragment();
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.frame_container, fragment, "choose_topic_fragment")
-                        .addToBackStack(null)
+                        //.addToBackStack(null)
                         .commit();
             }
         });

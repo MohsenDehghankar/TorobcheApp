@@ -23,7 +23,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.024"
-            app:srcCompat ="@mipmap/avatar_1" />
+            app:srcCompat="@mipmap/avatar_1" />
 
         <TextView
             android:id="@+id/user_id"
@@ -43,10 +43,10 @@
             android:layout_width="197dp"
             android:layout_height="35dp"
             android:layout_marginTop="5dp"
-            android:text="level"
             android:fontFamily="@font/acme"
-            android:textSize="30sp"
+            android:text="level"
             android:textAlignment="center"
+            android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/user_id" />
@@ -56,10 +56,10 @@
             android:layout_width="197dp"
             android:layout_height="35dp"
             android:layout_marginTop="6dp"
-            android:textAlignment="center"
             android:fontFamily="@font/acme"
-            android:textSize="30sp"
             android:text="No Group"
+            android:textAlignment="center"
+            android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/statistic" />
@@ -77,14 +77,27 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <TextView
+        android:id="@+id/topics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:fontFamily="@font/acme"
+        android:text="@string/favorite_topics"
+        android:textAlignment="center"
+        android:textSize="45sp"
+        app:layout_constraintBottom_toTopOf="@+id/category_recyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/category_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
         android:gravity="center"
         android:orientation="horizontal"
-        android:layout_marginBottom="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

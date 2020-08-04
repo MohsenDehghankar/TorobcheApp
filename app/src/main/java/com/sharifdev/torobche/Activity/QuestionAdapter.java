@@ -12,30 +12,35 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.sharifdev.torobche.Category.CategoryRecyclerViewAdapter;
 import com.sharifdev.torobche.Category.SelectCategoryActivity;
 import com.sharifdev.torobche.R;
+import com.sharifdev.torobche.backUtils.CategoryUtils;
+import com.sharifdev.torobche.model.History;
+import com.sharifdev.torobche.model.Question;
 
 import java.util.List;
 
-public class QuestionAdapter extends RecyclerView.Adapter<ImageHolder> {
+public class QuestionAdapter extends RecyclerView.Adapter<HistoryHolder> {
 
-    private final List<SelectCategoryActivity.HolderClass> mValues;
+    private final List<Question> mValues;
     private Context context;
+    private ActivityFragment fragment;
 
-    public QuestionAdapter(Context context, List<SelectCategoryActivity.HolderClass> items) {
+    public QuestionAdapter(Context context, List<Question> items, ActivityFragment fragment) {
         mValues = items;
         this.context = context;
+        this.fragment = fragment;
     }
 
     @Override
-    public ImageHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public HistoryHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LinearLayout view;
         if (viewType == R.layout.single_image_layout) {
             view = (LinearLayout) LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.single_image_layout, parent, false);
+                    .inflate(R.layout.history_card, parent, false);
         } else {
             view = (LinearLayout) LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.add_button, parent, false);
         }
-        return new ImageHolder(view);
+        return new HistoryHolder(view);
     }
 
 
@@ -43,27 +48,34 @@ public class QuestionAdapter extends RecyclerView.Adapter<ImageHolder> {
     public int getItemViewType(int position) {
         return (position == mValues.size()) ? R.layout.add_button_layout : R.layout.single_image_layout;
     }
+
     @Override
     public int getItemCount() {
         return mValues.size() + 1;
     }
 
     @Override
-    public void onBindViewHolder(final ImageHolder holder, final int position) {
+    public void onBindViewHolder(final HistoryHolder holder, final int position) {
         if (position == mValues.size()) {
-            holder.mImageView.setOnClickListener(new View.OnClickListener() {
+            holder.imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context, QuestionMakeActivity.class);
-                    context.startActivity(intent);
+                    fragment.startActivityForResult(intent, 1);
                 }
             });
         } else {
-            holder.mImageView.setImageResource(mValues.get(position).image);
-            holder.mImageView.setOnClickListener(new View.OnClickListener() {
+            int imageByName = CategoryUtils.getCategoryImageByName(mValues.get(position).getTopic());
+            holder.imageView.setImageResource(imageByName);
+            holder.point.setText(mValues.get(position).getText());
+            holder.topic.setText(mValues.get(position).getTopic());
+            holder.imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    // todo show question
+                    Intent intent = new Intent(context, QuestionMakeActivity.class);
+                    intent.putExtra("questionId", mValues.get(position).getObjId());
+                    fragment.startActivityForResult(intent, 1);
                 }
             });
         }

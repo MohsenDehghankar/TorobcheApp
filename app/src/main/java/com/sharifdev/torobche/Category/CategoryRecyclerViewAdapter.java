@@ -67,6 +67,8 @@ public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRe
             holder.mImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    if (mValues.get(position).name.equals("Loading..."))
+                        return;
                     Intent intent = new Intent(context, CategoryPage.class);
                     intent.putExtra("image", mValues.get(position).image);
                     intent.putExtra("name", mValues.get(position).name);
