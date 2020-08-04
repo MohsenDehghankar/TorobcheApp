@@ -4,12 +4,18 @@ import android.view.View;
 
 import androidx.fragment.app.Fragment;
 
+import com.parse.FunctionCallback;
+import com.parse.ParseCloud;
 import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 import com.sharifdev.torobche.Home;
 import com.sharifdev.torobche.HomeFragment;
 import com.sharifdev.torobche.R;
+
+import java.util.HashMap;
 
 /**
  * Work with user table in Backend
@@ -28,5 +34,11 @@ public class UserUtils {
                     ((HomeFragment) fragment).loadUserData(view);
             }
         });
+    }
+
+    public static void isUserAvailable(String user, FunctionCallback<Boolean> callback) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("username", user);
+        ParseCloud.callFunctionInBackground("does_user_exists", params, callback);
     }
 }

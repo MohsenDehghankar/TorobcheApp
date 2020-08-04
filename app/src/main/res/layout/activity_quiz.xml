@@ -13,7 +13,7 @@
         android:layout_height="55dp"
         android:layout_marginTop="30dp"
         android:gravity="center"
-        android:hint="Name"
+        android:hint="Quiz Name"
         app:boxStrokeColor="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,26 +48,6 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/number_inp_layout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="296dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="26dp"
-        android:gravity="center"
-        android:hint="Number of Questions"
-        app:boxStrokeColor="@color/colorPrimary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/time_inp_layout">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/number_inp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="numberDecimal" />
-
-    </com.google.android.material.textfield.TextInputLayout>
 
     <HorizontalScrollView
         android:id="@+id/scroll_group"
@@ -77,7 +57,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/number_inp_layout">
+        app:layout_constraintTop_toBottomOf="@id/time_inp_layout">
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/mainTagChipGroup"
@@ -128,6 +108,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/username_inp_quiz" />
 
+
+    <ProgressBar
+        android:id="@+id/user_add_loading"
+        android:layout_width="77dp"
+        android:layout_height="78dp"
+        android:visibility="gone"
+        android:layout_marginTop="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"

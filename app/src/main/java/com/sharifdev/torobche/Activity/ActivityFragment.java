@@ -19,7 +19,9 @@ import com.sharifdev.torobche.Category.SelectCategoryActivity;
 import com.sharifdev.torobche.R;
 import com.sharifdev.torobche.backUtils.HistoryUtils;
 import com.sharifdev.torobche.backUtils.QuestionUtils;
+import com.sharifdev.torobche.backUtils.QuizUtils;
 import com.sharifdev.torobche.model.Question;
+import com.sharifdev.torobche.model.Quiz;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,7 +29,7 @@ import java.util.List;
 
 public class ActivityFragment extends Fragment {
     private ArrayList<HistoryAdapter.HistoryValue> histories = new ArrayList<>();
-    private ArrayList<SelectCategoryActivity.HolderClass> quizzes = new ArrayList<>();
+    private ArrayList<Quiz> quizzes = new ArrayList<>();
     private ArrayList<Question> questions = new ArrayList<>();
     private ProgressBar progressBar;
 
@@ -78,19 +80,37 @@ public class ActivityFragment extends Fragment {
     }
 
     private void initQuizRecyclerView(View rootView) {
-        RecyclerView quizRecyclerView = rootView.findViewById(R.id.quiz_recyclerView);
+        final RecyclerView quizRecyclerView = rootView.findViewById(R.id.quiz_recyclerView);
         quizRecyclerView.setHasFixedSize(true);
 
         RecyclerView.LayoutManager layoutManager
                 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         quizRecyclerView.setLayoutManager(layoutManager);
 
-        // todo get all quizzes from server
-        for (int i = 0; i < 10; i++)
-            quizzes.add(new SelectCategoryActivity.HolderClass("quiz" + i, R.drawable.quiz));
-
+        quizzes = new ArrayList<>();
         QuizAdapter mAdapter = new QuizAdapter(getContext(), quizzes);
         quizRecyclerView.setAdapter(mAdapter);
+
+        QuizUtils.getQuizes(new FunctionCallback<List<ParseObject>>() {
+            @Override
+            public void done(List<ParseObject> object, ParseException e) {
+                if (e != null)
+                    e.printStackTrace();
+                else {
+                    quizzes = new ArrayList<>();
+                    for (ParseObject parseObject : object) {
+                        quizzes.add(new Quiz(
+                                parseObject.getString("name"),
+                                parseObject.getList("participants"),
+                                parseObject.getInt("time"),
+                                parseObject.getList("questions")
+                        ));
+                    }
+                    QuizAdapter mAdapter = new QuizAdapter(getContext(), quizzes);
+                    quizRecyclerView.setAdapter(mAdapter);
+                }
+            }
+        });
     }
 
     public void initQuestionRecyclerView(View rootView) {
