@@ -50,15 +50,18 @@ public class GameFragment extends Fragment {
         multi_player_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 ChooseTopicFragment fragment = new ChooseTopicFragment();
+                Bundle args = new Bundle();
+                args.putBoolean("is_multi", true);
+                fragment.setArguments(args);
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.frame_container, fragment, "choose_topic_fragment")
                         //.addToBackStack(null)
                         .commit();
             }
         });
+
+        // todo
 
         Button group_button = (Button) rootView.findViewById(R.id.gp_btn);
         group_button.setOnClickListener(new View.OnClickListener() {

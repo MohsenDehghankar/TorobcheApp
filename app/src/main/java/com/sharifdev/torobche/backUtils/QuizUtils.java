@@ -6,6 +6,7 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.gson.Gson;
+import com.parse.CountCallback;
 import com.parse.FindCallback;
 import com.parse.FunctionCallback;
 import com.parse.GetCallback;
@@ -118,5 +119,14 @@ public class QuizUtils {
         users.add(ParseUser.getCurrentUser());
         quiz.put("users", users);
         quiz.saveInBackground(callback);
+    }
+
+    public static void goToWaitingRoom(String topic, FindCallback<ParseObject> callback) {
+        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("WaitingRoom");
+        //ArrayList<ParseUser> useres = new ArrayList<>();
+        //useres.add(ParseUser.getCurrentUser());
+        //query.whereContainedIn("users", useres);
+        query.whereEqualTo("topic", topic);
+        query.findInBackground(callback);
     }
 }
