@@ -1,6 +1,7 @@
 package com.sharifdev.torobche.model;
 
 
+import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.sharifdev.torobche.R;
 
@@ -57,5 +58,7 @@ public class Question {
      public int image4 = R.drawable.no_photo;
      public int questionImage = R.drawable.no_photo;
      public int correctAnswer;
+
+
 
 }

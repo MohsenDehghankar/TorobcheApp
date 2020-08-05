@@ -6,16 +6,27 @@
     android:layout_height="match_parent">
 
 
+    <ProgressBar
+        android:id="@+id/load_quiz"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="50dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/one_player_btn"
         style="@style/Widget.MaterialComponents.Button"
         android:layout_width="292dp"
         android:layout_height="73dp"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         android:text="Single Player"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +37,7 @@
         style="@style/Widget.MaterialComponents.Button"
         android:layout_width="292dp"
         android:layout_height="73dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="150dp"
         android:gravity="center"
         android:text="Group Competition"
         android:textSize="18sp"
@@ -41,14 +52,29 @@
         style="@style/Widget.MaterialComponents.Button"
         android:layout_width="292dp"
         android:layout_height="73dp"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         android:text="Multi Player"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintTop_toBottomOf="@id/one_player_btn"/>
+        app:layout_constraintTop_toBottomOf="@id/one_player_btn" />
+
+    <Button
+        android:id="@+id/custom_quiz"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="292dp"
+        android:layout_height="73dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="Invited Quiz"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/multi_player_btn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

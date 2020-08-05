@@ -99,7 +99,7 @@ public class QuestionMakeActivity extends AppCompatActivity {
                             ((TextView) findViewById(R.id.c2_text)).getText().toString(),
                             ((TextView) findViewById(R.id.c3_text)).getText().toString(),
                             ((TextView) findViewById(R.id.c4_text)).getText().toString(),
-                            ((TextInputEditText) findViewById(R.id.topic_inp_layout)).getText().toString(),
+                            ((TextInputEditText) findViewById(R.id.topic_inp)).getText().toString(),
                             progressBar,
                             ans + 1,
                             QuestionMakeActivity.this

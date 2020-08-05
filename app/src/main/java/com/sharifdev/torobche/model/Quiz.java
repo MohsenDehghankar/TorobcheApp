@@ -13,6 +13,8 @@ public class Quiz {
     private List<Object> participants;
     private int time;
     private List<Object> questions;
+    public ParseObject quiz;
+    public ParseObject currentQ;
 
     public Quiz(String name, List<Object> participants, int time, List<Object> questions) {
         this.name = name;
@@ -26,6 +28,27 @@ public class Quiz {
                 e.printStackTrace();
             }
         }*/
+    }
+
+    public QuizType type;
+
+    public Quiz(ParseObject quiz, String type, ParseObject q) {
+        this.quiz = quiz;
+        this.currentQ = q;
+        switch (type) {
+            case "single":
+                this.type = QuizType.SINGLE_PLAYER;
+                break;
+            case "multi":
+                this.type = QuizType.MULTI_PLAYER;
+                break;
+            case "group":
+                this.type = QuizType.GROUP_GAME;
+                break;
+            case "custom":
+                this.type = QuizType.CUSTOM;
+                break;
+        }
     }
 
     public String getName() {
@@ -64,5 +87,6 @@ public class Quiz {
 enum QuizType {
     SINGLE_PLAYER,
     MULTI_PLAYER,
-    GROUP_GAME
+    GROUP_GAME,
+    CUSTOM
 }

@@ -41,4 +41,10 @@ public class UserUtils {
         params.put("username", user);
         ParseCloud.callFunctionInBackground("does_user_exists", params, callback);
     }
+
+    public static void addPoint(int point) {
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        currentUser.put("level", ((int) currentUser.get("level")) + point);
+        currentUser.saveInBackground();
+    }
 }
