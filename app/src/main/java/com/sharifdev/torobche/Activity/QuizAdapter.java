@@ -35,12 +35,12 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizHolder> {
     @Override
     public QuizHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LinearLayout view;
-        if (viewType == R.layout.single_image_layout) {
+        if (viewType == R.layout.history_card) {
             view = (LinearLayout) LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.history_card, parent, false);
         } else {
             view = (LinearLayout) LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.add_button, parent, false);
+                    .inflate(R.layout.add_button_layout, parent, false);
         }
         return new QuizHolder(view);
     }
@@ -48,7 +48,7 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizHolder> {
 
     @Override
     public int getItemViewType(int position) {
-        return (position == mValues.size()) ? R.layout.add_button_layout : R.layout.single_image_layout;
+        return (position == mValues.size()) ? R.layout.add_button_layout : R.layout.history_card;
     }
 
     @Override
@@ -79,7 +79,7 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizHolder> {
         }
     }
 
-    class QuizHolder extends RecyclerView.ViewHolder {
+    public static class QuizHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
         TextView name;
         TextView time;

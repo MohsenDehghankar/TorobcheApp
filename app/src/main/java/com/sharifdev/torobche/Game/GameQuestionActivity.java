@@ -61,6 +61,7 @@ public class GameQuestionActivity extends AppCompatActivity {
             }
         });
 
+        // todo
         setQuestion(new Question());
 
     }
