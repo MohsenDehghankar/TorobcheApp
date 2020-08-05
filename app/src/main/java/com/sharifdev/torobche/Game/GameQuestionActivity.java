@@ -24,10 +24,10 @@ import java.util.ArrayList;
 public class GameQuestionActivity extends AppCompatActivity {
     private int q_number = 0;
     private Button next;
-    int[] answers = new int[10];
+    boolean[] answers = new boolean[10];
     int h = 0;
     CountDownTimer mCountDownTimer;
-
+    Question currentQuestion ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,46 +45,60 @@ public class GameQuestionActivity extends AppCompatActivity {
             public void onClick(View view) {
                 mCountDownTimer.cancel();
                 if (q_number == 10) {
-                    //todo show correct answer( not important now)
+                    //todo show correct answer(not important now)
                     saveAnswer();
                     Intent i = new Intent(getApplicationContext(), Home.class);
                     startActivity(i);
-                    //todo add to score
+                    calculateScore(5);  //todo add to user's score
                     finish();
                 }
                 if (q_number < 10) {
-                    //todo show correct answer( not important now)
+                    //todo show correct answer(not important now)
                     saveAnswer();
                     //todo get random question
-                    setQuestion(new Question());
+                    currentQuestion = new Question();
+                    setQuestion(currentQuestion);
                 }
             }
         });
 
-        // todo
-        setQuestion(new Question());
+        Button like = (Button)findViewById(R.id.like_question);
+        like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                currentQuestion.likes +=1;
+            }
+        });
+
+        // todo get random question
+        currentQuestion = new Question();
+        setQuestion(currentQuestion);
 
     }
 
     private void saveAnswer(){
         ImageView imageView = (ImageView) findViewById(R.id.imageView1);
         if(imageView.getDrawable().getConstantState() ==getResources().getDrawable(R.drawable.correct).getConstantState()){
-            answers[q_number-1] = 1;
+            if(1 == currentQuestion.correctAnswer)
+                answers[q_number-1] = true;
             return;
         }
         imageView = (ImageView) findViewById(R.id.imageView2);
         if(imageView.getDrawable().getConstantState() ==getResources().getDrawable(R.drawable.correct).getConstantState()){
-            answers[q_number-1] = 2;
+            if(2 == currentQuestion.correctAnswer)
+                answers[q_number-1] = true;
             return;
         }
         imageView = (ImageView) findViewById(R.id.imageView3);
         if(imageView.getDrawable().getConstantState() ==getResources().getDrawable(R.drawable.correct).getConstantState()){
-            answers[q_number-1] = 3;
+            if(3 == currentQuestion.correctAnswer)
+                answers[q_number-1] = true;
             return;
         }
         imageView = (ImageView) findViewById(R.id.imageView4);
         if(imageView.getDrawable().getConstantState() ==getResources().getDrawable(R.drawable.correct).getConstantState()){
-            answers[q_number-1] = 4;
+            if(4 == currentQuestion.correctAnswer)
+                answers[q_number-1] = true;
         }
     }
 
@@ -106,7 +120,7 @@ public class GameQuestionActivity extends AppCompatActivity {
      * call it for each question ( set images to no_photo if the question have not photo)
      */
     private void setQuestion(Question q) {
-        fillComponent(R.id.q_image, q.questionImage, R.id.q_text, q.questionText);
+        fillComponent(R.id.q_image, q.questionImage, R.id.q_text, q.getText());
         fillComponent(R.id.c1_image, q.image1, R.id.c1_text, q.answerText1);
         fillComponent(R.id.c2_image, q.image2, R.id.c2_text, q.answerText2);
         fillComponent(R.id.c3_image, q.image3, R.id.c3_text, q.answerText3);
@@ -120,6 +134,16 @@ public class GameQuestionActivity extends AppCompatActivity {
         q_number += 1;
 
         setTimeBar();
+    }
+
+    private int calculateScore(int valueOfQ){
+        int score = 0;
+        for (int i =0 ;i< answers.length; i++){
+            if(answers[i]){
+                score += valueOfQ;
+            }
+        }
+        return score;
     }
 
     private void setDefaultImage(ImageView image){
