@@ -37,14 +37,17 @@ import java.util.List;
 public class GameQuestionActivity extends AppCompatActivity {
     private int q_number = 0;
     private Button next;
-    int[] answers = new int[10];
+    boolean[] answers = new boolean[10];
     int h = 0;
     CountDownTimer mCountDownTimer;
+
     public Quiz quiz;
     public ProgressBar loadQuestion;
     private TextView num;
     public AlertDialog result;
     private String type;
+
+    Question currentQuestion ;
 
 
     @Override
@@ -107,6 +110,7 @@ public class GameQuestionActivity extends AppCompatActivity {
             }
         });
 
+
     }
 
     private void showAnswers(int point) {
@@ -115,6 +119,19 @@ public class GameQuestionActivity extends AppCompatActivity {
         textView.bringToFront();
         textView.setText(point);
     }
+
+        Button like = (Button)findViewById(R.id.like_question);
+        like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                currentQuestion.likes +=1;
+            }
+        });
+
+        // todo get random question
+        currentQuestion = new Question();
+        setQuestion(currentQuestion);
+
 
     public void showAnswerOfOne(int answer) {
         AlertDialog.Builder builder = new MaterialAlertDialogBuilder(this);
@@ -237,7 +254,7 @@ public class GameQuestionActivity extends AppCompatActivity {
      * call it for each question ( set images to no_photo if the question have not photo)
      */
     private void setQuestion(Question q) {
-        fillComponent(R.id.q_image, q.questionImage, R.id.q_text, q.questionText);
+        fillComponent(R.id.q_image, q.questionImage, R.id.q_text, q.getText());
         fillComponent(R.id.c1_image, q.image1, R.id.c1_text, q.answerText1);
         fillComponent(R.id.c2_image, q.image2, R.id.c2_text, q.answerText2);
         fillComponent(R.id.c3_image, q.image3, R.id.c3_text, q.answerText3);
@@ -254,7 +271,18 @@ public class GameQuestionActivity extends AppCompatActivity {
         setTimeBar();
     }
 
-    private void setDefaultImage(ImageView image) {
+
+    private int calculateScore(int valueOfQ){
+        int score = 0;
+        for (int i =0 ;i< answers.length; i++){
+            if(answers[i]){
+                score += valueOfQ;
+            }
+        }
+        return score;
+    }
+
+    private void setDefaultImage(ImageView image){
         image.setImageResource(R.drawable.wrong);
     }
 

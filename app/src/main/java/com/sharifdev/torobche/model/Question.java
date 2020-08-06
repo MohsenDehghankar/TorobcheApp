@@ -57,8 +57,7 @@ public class Question {
      public int image3 = R.drawable.no_photo;
      public int image4 = R.drawable.no_photo;
      public int questionImage = R.drawable.no_photo;
-     public int correctAnswer;
-
-
+     public int correctAnswer = 0;
+     public int likes = 0;
 
 }
