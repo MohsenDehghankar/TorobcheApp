@@ -17,9 +17,12 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.sharifdev.torobche.Activity.QuestionMakeActivity;
+import com.sharifdev.torobche.Game.GameQuestionActivity;
 import com.sharifdev.torobche.R;
+import com.sharifdev.torobche.model.Quiz;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -98,6 +101,57 @@ public class QuestionUtils {
                 }
             }
         });
+    }
+
+    public static void addQuestions(ArrayList<ParseObject> ids, ProgressBar progressBar) {
+    }
+
+    public static void getPoint(final String type, final int[] answers, final Quiz quiz, final GameQuestionActivity activity) {
+        final ParseObject q = quiz.quiz;
+        final List<Object> questions = q.getList("questions");
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String topic = "";
+                ArrayList<String> ids = new ArrayList<>();
+                int point = 0;
+                int counter = 0;
+                for (Object question : questions) {
+                    if (topic.isEmpty())
+                        topic = ((ParseObject) question).getString("topic");
+                    ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("AnswerOfQuestion");
+                    if (type.equals("single"))
+                        query.whereEqualTo("questionDB", ((ParseObject) question));
+                    else
+                        query.whereEqualTo("userQuestion", ((ParseObject) question));
+                    try {
+                        List<ParseObject> parseObjects = query.find();
+                        if (answers[counter++] == ((int) parseObjects.get(0).get("answer"))) {
+                            point += 1;
+                        }
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                }
+                ParseObject his = new ParseObject("UserQuizHistory");
+                his.put("user", ParseUser.getCurrentUser());
+                his.put("point", point);
+                his.put("quizDate", new Date());
+                his.put("categoryName", topic);
+                try {
+                    his.save();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                // todo
+                UserUtils.addPoint(point);
+                try {
+                    quiz.currentQ.delete();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
 }

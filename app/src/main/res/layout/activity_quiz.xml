@@ -112,6 +112,19 @@
         app:layout_constraintTop_toBottomOf="@id/username_inp_quiz" />
 
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/add_question"
+        style=""
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Add Question"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/add_username" />
+
+
     <ProgressBar
         android:id="@+id/user_add_loading"
         android:layout_width="77dp"

@@ -88,7 +88,7 @@ public class ActivityFragment extends Fragment {
         quizRecyclerView.setLayoutManager(layoutManager);
 
         quizzes = new ArrayList<>();
-        QuizAdapter mAdapter = new QuizAdapter(getContext(), quizzes);
+        QuizAdapter mAdapter = new QuizAdapter(getContext(), quizzes, questions, this);
         quizRecyclerView.setAdapter(mAdapter);
 
         QuizUtils.getQuizes(new FunctionCallback<List<ParseObject>>() {
@@ -106,7 +106,7 @@ public class ActivityFragment extends Fragment {
                                 parseObject.getList("questions")
                         ));
                     }
-                    QuizAdapter mAdapter = new QuizAdapter(getContext(), quizzes);
+                    QuizAdapter mAdapter = new QuizAdapter(getContext(), quizzes, questions, ActivityFragment.this);
                     quizRecyclerView.setAdapter(mAdapter);
                 }
             }
@@ -164,6 +164,12 @@ public class ActivityFragment extends Fragment {
                 View view = getView();
                 if (view != null) {
                     initQuestionRecyclerView(view);
+                }
+            }
+            if (data != null && data.getBooleanExtra("quiz_added", false)) {
+                View view = getView();
+                if (view != null) {
+                    initQuizRecyclerView(view);
                 }
             }
         } catch (Exception e) {

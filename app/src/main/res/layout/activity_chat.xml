@@ -19,7 +19,6 @@
         app:layout_constraintRight_toRightOf="parent">
 
 
-
         <EditText
             android:id="@+id/message"
             android:layout_width="0dp"
@@ -31,6 +30,7 @@
             android:background="@android:color/transparent"
             android:hint="Enter message"
             android:maxLines="6" />
+
         <Button
             android:id="@+id/send_message"
             android:layout_width="wrap_content"
@@ -63,5 +63,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:visibility="gone"
+        android:id="@+id/load_chat"
+        app:layout_constraintBottom_toTopOf="@+id/reyclerview_message_list"
+        app:layout_constraintEnd_toStartOf="@+id/reyclerview_message_list"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/reyclerview_message_list"
+        app:layout_constraintTop_toBottomOf="@+id/reyclerview_message_list" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

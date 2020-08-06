@@ -13,6 +13,7 @@ import com.sharifdev.torobche.Category.SelectCategoryActivity;
 import com.sharifdev.torobche.Home;
 import com.sharifdev.torobche.HomeFragment;
 import com.sharifdev.torobche.R;
+import com.sharifdev.torobche.model.Question;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -174,4 +175,8 @@ public class CategoryUtils {
             }
         });
     }
+
+//    public static Question fetchQuestion(){
+//
+//    }
 }
